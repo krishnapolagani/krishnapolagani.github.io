@@ -10,8 +10,7 @@
 </script>
 <head>
   <meta charset="UTF-8" />
-  <title><title>Ramakrishna Polagani | Business Systems Analyst • PLM Architect • Traveller • Sports Enthusiast</title>
-</title>
+<title>Ramakrishna Polagani | Business Systems Analyst • PLM Architect • Traveller • Sports Enthusiast</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Ramakrishna Polagani - Business Systems Analyst portfolio, experience, skills, and projects." />
   <style>
@@ -230,19 +229,33 @@
       background-color: #f9fafb;
     }
 
-    @media (max-width: 720px) {
-      .hero-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
+@media (max-width: 720px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 
-      nav {
-        display: none;
-      }
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-      header {
-        padding-bottom: 18px;
-      }
-    }
+  nav {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    margin-left: 0;
+    margin-right: 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  header {
+    padding-bottom: 18px;
+  }
+}
   </style>
 </head>
 <body>
