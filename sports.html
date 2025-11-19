@@ -4,16 +4,20 @@
   <meta charset="UTF-8" />
   <title>RK Polagani | Sports Enthusiast</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Sports experiences and interests of Ramakrishna (RK) Polagani." />
+  <meta name="description" content="Sports interests and experiences of Ramakrishna (RK) Polagani." />
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Same header/nav as index.html -->
+<!-- Header (matches index.html) -->
 <header>
   <div class="container">
     <div class="top-bar">
-      <a href="index.html" class="brand">RK POLAGANI</a>
+
+      <a href="index.html" class="brand">
+        <span class="brand-mark">RK</span> POLAGANI
+      </a>
+
       <nav>
         <a href="index.html">Home</a>
         <a href="index.html#about">About</a>
@@ -24,84 +28,127 @@
         <a href="travel.html">Travelling</a>
         <a href="sports.html" class="active">Sports</a>
       </nav>
+
     </div>
   </div>
 </header>
 
+
 <main class="container">
-  <h1>Sports & Fitness</h1>
-  <p>
-    Sports have always been a big part of my life not just as entertainment, but as a source of 
-    energy, discipline, and motivation. Whether it's the strategy behind a close cricket chase, the 
-    atmosphere of a baseball game, or the precision of Formula 1 racing, I enjoy the blend of 
-    competition, teamwork, and passion that sports bring.
-  </p>
 
-  <div class="section-caption">Interests</div>
-  <h2>Sports I follow or play</h2>
-
-  <div class="sports-list">
-
-    <!-- Cricket -->
+  <!-- Page Title -->
+  <section class="reveal">
     <div class="card">
-      <h3>Cricket – Sunrisers Hyderabad (SRH)</h3>
+      <h1 style="margin-bottom:10px;">Sports & Fitness</h1>
+      <p class="card-subtitle">Passion, energy, discipline, and inspiration through sports.</p>
+
       <p>
-        I'm a dedicated supporter of SRH. I enjoy the strategic side of T20 cricket — from powerplay momentum 
-        to death-over execution. Watching SRH's bowling strength and comeback performances makes every match exciting.
+        Sports have always been a big part of my life — not just entertainment, but a source of
+        motivation, teamwork, focus, and resilience. Whether it's the strategy in a tight cricket chase,
+        the atmosphere of a Blue Jays game, or the precision of Formula 1 racing,
+        every sport brings its own excitement and lessons.
       </p>
     </div>
+  </section>
 
-    <!-- Baseball -->
+
+  <!-- Interests Section -->
+  <section class="reveal">
+    <div class="section-caption">Interests</div>
     <div class="card">
-      <h3>Baseball – Toronto Blue Jays</h3>
-      <p>
-        The Blue Jays introduced me to baseball's unique rhythm and tactical depth. I enjoy following their 
-        games, especially the teamwork, pitching battles, and the atmosphere around home runs at Rogers Centre.
-      </p>
-    </div>
+      <h2>Sports I follow or play</h2>
 
-    <!-- Formula 1 -->
+      <div class="sports-list">
+
+        <!-- Cricket -->
+        <div class="card">
+          <h3>Cricket – Sunrisers Hyderabad (SRH)</h3>
+          <p>
+            I'm a dedicated supporter of SRH. I enjoy the strategic side of T20 cricket — from powerplay
+            momentum to death-over execution. SRH's bowling strength and comeback performances always keep
+            matches exciting.
+          </p>
+        </div>
+
+        <!-- Baseball -->
+        <div class="card">
+          <h3>Baseball – Toronto Blue Jays</h3>
+          <p>
+            Watching the Blue Jays introduced me to baseball's tactical depth. I enjoy the pitching battles,
+            big home-run moments, and the electric atmosphere at Rogers Centre.
+          </p>
+        </div>
+
+        <!-- Formula 1 -->
+        <div class="card">
+          <h3>Formula 1 – Max Verstappen</h3>
+          <p>
+            Max Verstappen’s driving style — aggressive, calculated, and relentlessly competitive —
+            makes every race exciting. F1 combines engineering excellence with raw driver skill.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Gallery Section -->
+  <section class="reveal">
+    <div class="section-caption">Gallery</div>
     <div class="card">
-      <h3>Formula 1 – Max Verstappen</h3>
-      <p>
-        I'm a strong admirer of Max Verstappen's racing style — aggressive, calculated, and consistently 
-        competitive. F1 combines engineering excellence and driver skill, and following Max’s races keeps the 
-        sport thrilling every season.
-      </p>
+      <h2>Sports Photos</h2>
+
+      <div class="gallery">
+
+        <div class="gallery-item">
+          <img src="images/cricket.jpg" alt="Cricket photo" />
+          <div class="caption">Enjoying cricket moments — SRH matches and IPL highlights.</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="images/baseball.jpg" alt="Baseball photo" />
+          <div class="caption">Toronto Blue Jays — big moments and stadium atmosphere.</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="images/f1.jpg" alt="Formula 1 photo" />
+          <div class="caption">F1 action — Max Verstappen on track.</div>
+        </div>
+
+      </div>
     </div>
 
-  </div>
-
-  <div class="section-caption">Gallery</div>
-  <h2>Sports photos</h2>
-  <div class="gallery">
-    <div class="gallery-item">
-      <img src="images/cricket.jpg" alt="Cricket photo" />
-      <div class="caption">Enjoying cricket moments — SRH matches and IPL highlights.</div>
+    <div class="back-link" style="margin-top:24px;">
+      ← <a href="index.html">Back to main profile</a>
     </div>
+  </section>
 
-    <div class="gallery-item">
-      <img src="images/baseball.jpg" alt="Baseball photo" />
-      <div class="caption">Toronto Blue Jays — big moments and stadium atmosphere.</div>
-    </div>
-
-    <div class="gallery-item">
-      <img src="images/f1.jpg" alt="Formula 1 photo" />
-      <div class="caption">F1 action — Max Verstappen on track.</div>
-    </div>
-  </div>
-
-  <div class="back-link">
-    ← <a href="index.html">Back to main profile</a>
-  </div>
 </main>
 
+
 <footer>
-  © <span id="year"></span> Ramakrishna (RK) Polagani
+  <div class="container">
+    © <span id="year"></span> Ramakrishna (RK) Polagani
+  </div>
 </footer>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Scroll Reveal Logic (matches index.html)
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealOnScroll = () => {
+    revealElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 80) {
+        el.classList.add('reveal-visible');
+      }
+    });
+  };
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll();
 </script>
+
 </body>
 </html>
