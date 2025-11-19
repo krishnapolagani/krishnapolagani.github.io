@@ -52,8 +52,8 @@ body {
 header {
   background: linear-gradient(135deg, #0a1a44, #1b3c92);
   color: #ffffff;
-  padding: 18px 0 26px;
-  box-shadow: 0 14px 32px rgba(7, 12, 32, 0.55);
+  padding: 22px 0 30px;
+  box-shadow: 0 18px 40px rgba(7, 12, 32, 0.65);
 }
 
 .top-bar {
@@ -67,7 +67,7 @@ header {
 
 .brand {
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   font-size: 14px;
   text-transform: uppercase;
   display: inline-flex;
@@ -77,7 +77,7 @@ header {
   text-decoration: none;
 }
 
-/* Replace old square with RK badge */
+/* Keep support for RK badge if you add it later */
 .brand::before {
   content: none;
 }
@@ -96,7 +96,7 @@ header {
 }
 
 .brand:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 /* ---------- Navigation ---------- */
@@ -105,17 +105,21 @@ nav {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 nav a {
   color: #dde5ff;
   text-decoration: none;
   font-size: 14px;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
-  transition: background-color 0.15s ease, color 0.15s ease,
-    transform 0.1s ease;
+  letter-spacing: 0.02em;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.18s ease;
 }
 
 nav a:hover,
@@ -123,6 +127,7 @@ nav a:focus {
   background-color: rgba(255, 255, 255, 0.16);
   color: #ffffff;
   transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
 }
 
 nav a.active {
@@ -133,38 +138,40 @@ nav a.active {
 /* ---------- Hero (index main header area) ---------- */
 
 .hero {
-  padding: 28px 0 14px;
+  padding: 40px 0 28px;
 }
 
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.6fr);
-  gap: 28px;
+  gap: 32px;
   align-items: stretch;
 }
 
 .hero h1 {
-  margin: 0 0 8px;
-  font-size: 32px;
+  margin: 0 0 12px;
+  font-size: 40px;
+  letter-spacing: -0.02em;
 }
 
 .hero h2 {
-  margin: 0 0 12px;
-  font-size: 16px;
+  margin: 0 0 14px;
+  font-size: 18px;
   font-weight: 500;
   color: #c7d5ff;
 }
 
 .hero p {
-  margin: 0 0 16px;
+  margin: 0 0 18px;
   color: #e3e8ff;
+  max-width: 620px;
 }
 
 .tag-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
 .tag {
@@ -176,12 +183,14 @@ nav a.active {
   color: #e3e8ff;
 }
 
+/* Hero motion – subtle float for the card */
 .hero-card {
   background: rgba(5, 10, 30, 0.9);
-  border-radius: 14px;
-  padding: 16px 16px 18px;
-  border: 1px solid rgba(148, 163, 184, 0.7);
-  box-shadow: 0 18px 40px rgba(4, 7, 20, 0.8);
+  border-radius: 18px;
+  padding: 18px 18px 20px;
+  border: 1px solid rgba(148, 163, 184, 0.75);
+  box-shadow: 0 20px 45px rgba(4, 7, 20, 0.82);
+  animation: hero-float 10s ease-in-out infinite;
 }
 
 .hero-card h3 {
@@ -201,8 +210,10 @@ nav a.active {
 
 .reveal {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(14px);
+  transition:
+    opacity 0.45s ease-out,
+    transform 0.45s ease-out;
 }
 
 .reveal-visible {
@@ -210,26 +221,47 @@ nav a.active {
   transform: translateY(0);
 }
 
+/* Stagger effect support if applied via JS */
+.reveal[data-delay="1"] { transition-delay: 0.05s; }
+.reveal[data-delay="2"] { transition-delay: 0.1s; }
+.reveal[data-delay="3"] { transition-delay: 0.15s; }
+
+@keyframes hero-float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
 /* ---------- Main content & cards ---------- */
 
 main {
-  padding: 28px 0 40px;
+  padding: 32px 0 46px;
 }
 
 section {
-  margin-bottom: 22px;
+  margin-bottom: 26px;
+}
+
+/* Alternating “Apple-style” rhythm */
+section:nth-of-type(even) .card {
+  background-color: #f8f9ff;
+}
+section:nth-of-type(odd) .card {
+  background-color: #ffffff;
 }
 
 .card {
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  padding: 20px 20px 22px;
+  border-radius: 18px;
+  padding: 22px 22px 24px;
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 10px 24px rgba(9, 12, 38, 0.16);
   position: relative;
   overflow: hidden;
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    border-color 0.15s ease, background-color 0.15s ease;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background-color 0.18s ease;
 }
 
 .card::before {
@@ -238,23 +270,23 @@ section {
   inset: 0;
   background: radial-gradient(
     circle at top left,
-    rgba(27, 60, 146, 0.08),
-    transparent 55%
+    rgba(27, 60, 146, 0.05),
+    transparent 60%
   );
   pointer-events: none;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 46px rgba(9, 12, 38, 0.2);
-  border-color: rgba(27, 60, 146, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(9, 12, 38, 0.18);
+  border-color: rgba(27, 60, 146, 0.36);
   background-color: #ffffff;
 }
 
 .card h2 {
   margin-top: 0;
   margin-bottom: 6px;
-  font-size: 19px;
+  font-size: 20px;
 }
 
 .card-subtitle {
@@ -267,7 +299,7 @@ section {
 .two-col {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: 18px;
+  gap: 20px;
 }
 
 .item {
@@ -300,11 +332,24 @@ section {
 
 .pill {
   font-size: 12px;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
   background: var(--primary-soft);
   color: var(--primary-dark);
   border: 1px solid rgba(27, 60, 146, 0.4);
+  white-space: nowrap;
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.12s ease;
+}
+
+.pill:hover {
+  background-color: #ffffff;
+  color: var(--primary-dark);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+  transform: translateY(-1px);
 }
 
 /* Contact row */
@@ -349,14 +394,22 @@ section {
 .gallery-item {
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 26px rgba(9, 12, 38, 0.18);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.24);
 }
 
 .gallery-item img {
   width: 100%;
-  height: 180px;
+  height: 190px;
   object-fit: cover;
   display: block;
 }
@@ -392,7 +445,7 @@ section {
   height: 40px;
   border-radius: 999px;
   border: none;
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(15, 23, 42, 0.94);
   color: #e5e7ff;
   font-size: 20px;
   cursor: pointer;
@@ -401,10 +454,19 @@ section {
   align-items: center;
   justify-content: center;
   z-index: 50;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
 }
 
 .back-to-top-btn.show {
   display: flex;
+}
+
+.back-to-top-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.75);
 }
 
 body.dark-mode .back-to-top-btn {
@@ -416,7 +478,7 @@ body.dark-mode .back-to-top-btn {
 
 footer {
   border-top: 1px solid var(--border);
-  padding: 14px 16px 18px;
+  padding: 16px 16px 20px;
   font-size: 12px;
   color: var(--text-muted);
   background-color: #f7f8fc;
@@ -431,7 +493,7 @@ body.dark-mode {
 
 body.dark-mode header {
   background: linear-gradient(135deg, #020617, #0b1437);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.75);
 }
 
 body.dark-mode nav a {
@@ -449,8 +511,14 @@ body.dark-mode .hero-card {
   border-color: #1e293b;
 }
 
-body.dark-mode .card {
+body.dark-mode section:nth-of-type(even) .card {
   background-color: #020617;
+}
+body.dark-mode section:nth-of-type(odd) .card {
+  background-color: #020617;
+}
+
+body.dark-mode .card {
   border-color: #1e293b;
 }
 
@@ -490,19 +558,23 @@ body.dark-mode .back-link a {
   }
 
   nav {
-    margin-top: 8px;
+    margin-top: 10px;
     justify-content: flex-start;
   }
 
-  nav a {
-    margin-left: 0;
-  }
-
   main {
-    padding-top: 20px;
+    padding-top: 24px;
   }
 
   .two-col {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero {
+    padding-top: 30px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
   }
 }
