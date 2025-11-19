@@ -28,6 +28,10 @@ body {
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -59,6 +63,8 @@ header {
   gap: 16px;
 }
 
+/* ---------- Brand / Logo ---------- */
+
 .brand {
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -67,23 +73,33 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  
-  /* Fix link styling */
   color: #ffffff;
   text-decoration: none;
+}
+
+/* Replace old square with RK badge */
+.brand::before {
+  content: none;
+}
+
+.brand-mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffffff, #c7d5ff);
+  color: var(--primary-dark);
+  font-size: 11px;
+  font-weight: 800;
 }
 
 .brand:hover {
   opacity: 0.8;
 }
-.brand::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-  background: #ffffff;
-  opacity: 0.9;
-}
+
+/* ---------- Navigation ---------- */
 
 nav {
   display: flex;
@@ -109,7 +125,6 @@ nav a:focus {
   transform: translateY(-1px);
 }
 
-/* Optional active state (add class="active" to any nav link) */
 nav a.active {
   background-color: #ffffff;
   color: var(--primary-dark);
@@ -180,6 +195,19 @@ nav a.active {
   padding-left: 18px;
   font-size: 13px;
   color: #dde5ff;
+}
+
+/* ---------- Scroll Reveal Animations ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ---------- Main content & cards ---------- */
@@ -354,6 +382,36 @@ section {
   text-decoration: underline;
 }
 
+/* ---------- Back to top button ---------- */
+
+.back-to-top-btn {
+  position: fixed;
+  right: 16px;
+  bottom: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7ff;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.back-to-top-btn.show {
+  display: flex;
+}
+
+body.dark-mode .back-to-top-btn {
+  background: rgba(15, 23, 42, 1);
+  color: #f9fafb;
+}
+
 /* ---------- Footer ---------- */
 
 footer {
@@ -362,6 +420,61 @@ footer {
   font-size: 12px;
   color: var(--text-muted);
   background-color: #f7f8fc;
+}
+
+/* ---------- Dark mode ---------- */
+
+body.dark-mode {
+  background-color: #050815;
+  color: #e5e7ff;
+}
+
+body.dark-mode header {
+  background: linear-gradient(135deg, #020617, #0b1437);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode nav a {
+  color: #e2e8f0;
+}
+
+body.dark-mode nav a:hover,
+body.dark-mode nav a:focus {
+  background-color: rgba(148, 163, 184, 0.3);
+  color: #f9fafb;
+}
+
+body.dark-mode .hero-card {
+  background: rgba(15, 23, 42, 0.96);
+  border-color: #1e293b;
+}
+
+body.dark-mode .card {
+  background-color: #020617;
+  border-color: #1e293b;
+}
+
+body.dark-mode .card-subtitle,
+body.dark-mode .item-meta,
+body.dark-mode .caption {
+  color: #94a3b8;
+}
+
+body.dark-mode .pill {
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7ff;
+  border-color: #475569;
+}
+
+body.dark-mode footer {
+  background-color: #020617;
+  border-top-color: #1e293b;
+  color: #64748b;
+}
+
+body.dark-mode .contact-row a,
+body.dark-mode .back-link a {
+  color: #c7d2fe;
 }
 
 /* ---------- Mobile tweaks ---------- */
