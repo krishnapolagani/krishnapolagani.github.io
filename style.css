@@ -185,9 +185,13 @@ nav a.active {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.6fr);
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
   gap: 32px;
-  align-items: stretch;
+  align-items: center;
+}
+
+.hero-main-text {
+  max-width: 640px;
 }
 
 .hero h1 {
@@ -206,7 +210,7 @@ nav a.active {
 .hero p {
   margin: 0 0 18px;
   color: #e3e8ff;
-  max-width: 620px;
+  max-width: 650px;
 }
 
 .tag-list {
@@ -241,7 +245,7 @@ nav a.active {
 /* Profile area in hero */
 .hero-profile-wrapper {
   max-width: 260px;
-  margin: 0 auto 20px;
+  margin: 0 auto 16px;
   padding: 16px 16px 20px;
   border-radius: 24px;
   background: radial-gradient(circle at top,
@@ -264,8 +268,10 @@ nav a.active {
   display: block;
 }
 
-/* Hero motion */
+/* Hero profile card on the right */
 .hero-card {
+  max-width: 340px;
+  margin-left: auto;
   background: rgba(5, 10, 30, 0.9);
   border-radius: 24px;
   padding: 20px 20px 22px;
@@ -274,15 +280,19 @@ nav a.active {
   animation: hero-float 10s ease-in-out infinite;
 }
 
-.hero-card h3 {
-  margin: 0 0 8px;
-  font-size: 14px;
+.hero-card-body {
+  margin-top: 8px;
+}
+
+.hero-card-title {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 600;
   color: #e3e8ff;
 }
 
-.hero-card ul {
-  margin: 0;
-  padding-left: 18px;
+.hero-card-line {
+  margin: 0 0 4px;
   font-size: 13px;
   color: #dde5ff;
 }
@@ -459,7 +469,7 @@ section:nth-of-type(odd) .card {
   text-decoration: underline;
 }
 
-/* ---------- Sports / Travel helpers ---------- */
+/* ---------- Sports / Travel / Blogs helpers ---------- */
 
 .sports-list,
 .travel-list,
@@ -707,6 +717,11 @@ body.dark-mode .theme-toggle-btn {
 @media (max-width: 720px) {
   .hero-grid {
     grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .hero-card {
+    margin: 0 auto;
   }
 
   .top-bar {
