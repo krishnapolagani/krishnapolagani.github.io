@@ -246,32 +246,54 @@
   const toggleBtn = document.getElementById('themeToggle');
   const faviconLink = document.getElementById('favicon');
 
-  const LIGHT_ICON = '☾'; // show moon when you're in light mode (click to go dark)
-  const DARK_ICON  = '☀️'; // show sun when you're in dark mode (click to go light)
+  const LIGHT_ICON = '☾';
+  const DARK_ICON  = '☀️';
 
   const LIGHT_FAVICON = 'images/favicon-rk-logo.png';
   const DARK_FAVICON  = 'images/favicon-rk-logo-dark.png';
 
-  function setTheme(isDark) {
+  const THEME_KEY = 'rk-theme';
+
+  function applyTheme(isDark, persist = true) {
     if (isDark) {
       body.classList.add('dark-mode');
       toggleBtn.textContent = DARK_ICON;
       if (faviconLink) faviconLink.href = DARK_FAVICON;
+      if (persist) localStorage.setItem(THEME_KEY, 'dark');
     } else {
       body.classList.remove('dark-mode');
       toggleBtn.textContent = LIGHT_ICON;
       if (faviconLink) faviconLink.href = LIGHT_FAVICON;
+      if (persist) localStorage.setItem(THEME_KEY, 'light');
     }
   }
 
-  // default: dark mode
-  setTheme(true);
+  (function initTheme() {
+    const saved = localStorage.getItem(THEME_KEY);
+
+    if (saved === 'dark') {
+      applyTheme(true, false);
+      return;
+    }
+
+    if (saved === 'light') {
+      applyTheme(false, false);
+      return;
+    }
+
+    // No saved preference: respect system preference, fallback to dark
+    const prefersDark = window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    applyTheme(prefersDark || true, false);
+  })();
 
   toggleBtn.addEventListener('click', () => {
     const currentlyDark = body.classList.contains('dark-mode');
-    setTheme(!currentlyDark);
+    applyTheme(!currentlyDark);
   });
 </script>
+
 
 <!-- Parallax glow effect -->
 <script>
