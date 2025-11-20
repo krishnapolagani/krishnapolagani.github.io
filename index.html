@@ -402,41 +402,46 @@
 
   const THEME_KEY = 'rk-theme';
 
-  function setTheme(isDark) {
+  function applyTheme(isDark, persist = true) {
     if (isDark) {
       body.classList.add('dark-mode');
       toggleBtn.textContent = DARK_ICON;
       if (faviconLink) faviconLink.href = DARK_FAVICON;
-      localStorage.setItem(THEME_KEY, 'dark');
+      if (persist) localStorage.setItem(THEME_KEY, 'dark');
     } else {
       body.classList.remove('dark-mode');
       toggleBtn.textContent = LIGHT_ICON;
       if (faviconLink) faviconLink.href = LIGHT_FAVICON;
-      localStorage.setItem(THEME_KEY, 'light');
+      if (persist) localStorage.setItem(THEME_KEY, 'light');
     }
   }
 
-  // Determine initial theme: saved preference > system preference > default dark
   (function initTheme() {
     const saved = localStorage.getItem(THEME_KEY);
+
     if (saved === 'dark') {
-      setTheme(true);
+      applyTheme(true, false);
       return;
     }
+
     if (saved === 'light') {
-      setTheme(false);
+      applyTheme(false, false);
       return;
     }
+
+    // No saved preference: respect system preference, fallback to dark
     const prefersDark = window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setTheme(prefersDark || true);
+
+    applyTheme(prefersDark || true, false);
   })();
 
   toggleBtn.addEventListener('click', () => {
     const currentlyDark = body.classList.contains('dark-mode');
-    setTheme(!currentlyDark);
+    applyTheme(!currentlyDark);
   });
 </script>
+
 
 <!-- Parallax glow effect for header background -->
 <script>
