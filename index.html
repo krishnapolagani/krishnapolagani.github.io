@@ -385,22 +385,42 @@
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('reveal-visible'));
   }
 </script>
-   <!-- Theme toggle button -->
-  <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">☾</button>
 
-  <!-- Theme toggle script -->
-  <script>
-    const body = document.body;
-    const toggleBtn = document.getElementById('themeToggle');
+<!-- Theme toggle button -->
+<button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">☾</button>
 
-    // default = dark mode
-    if (!body.classList.contains('dark-mode')) {
+<!-- Theme toggle script -->
+<script>
+  const body = document.body;
+  const toggleBtn = document.getElementById('themeToggle');
+  const faviconLink = document.getElementById('favicon');
+
+  const LIGHT_ICON = '☾'; // show moon when you're in light mode (click to go dark)
+  const DARK_ICON  = '☀️'; // show sun when you're in dark mode (click to go light)
+
+  const LIGHT_FAVICON = 'images/favicon-rk-logo.png';
+  const DARK_FAVICON  = 'images/favicon-rk-logo-dark.png';
+
+  function setTheme(isDark) {
+    if (isDark) {
       body.classList.add('dark-mode');
+      toggleBtn.textContent = DARK_ICON;
+      if (faviconLink) faviconLink.href = DARK_FAVICON;
+    } else {
+      body.classList.remove('dark-mode');
+      toggleBtn.textContent = LIGHT_ICON;
+      if (faviconLink) faviconLink.href = LIGHT_FAVICON;
     }
+  }
 
-    toggleBtn.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-    });
-  </script>
+  // default: dark mode
+  setTheme(true);
+
+  toggleBtn.addEventListener('click', () => {
+    const currentlyDark = body.classList.contains('dark-mode');
+    setTheme(!currentlyDark);
+  });
+</script>
+  
 </body>
 </html>
