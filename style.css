@@ -12,7 +12,7 @@
   --text-muted: #6f7a8a;
   --border: #d7deea;
 
-  --shadow-soft: 0 10px 28px rgba(11, 20, 46, 0.14);
+  --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.12);
 }
 
 /* ---------- Global reset & base ---------- */
@@ -61,11 +61,10 @@ header {
   box-shadow: 0 18px 40px rgba(7, 12, 32, 0.65);
   overflow: hidden;
   z-index: 0;
-  /* smooth theme change */
   transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* soft blurred “Apple-like” shapes behind the hero */
+/* soft blurred shapes behind the hero */
 header::before,
 header::after {
   content: "";
@@ -75,7 +74,6 @@ header::after {
   opacity: 0.85;
   pointer-events: none;
   z-index: -1;
-  /* parallax-ready */
   transform: translateY(var(--hero-parallax, 0px));
   transition: transform 0.06s linear;
 }
@@ -181,7 +179,7 @@ nav a.active {
   color: var(--primary-dark);
 }
 
-/* ---------- Hero (index main header area) ---------- */
+/* ---------- Hero ---------- */
 
 .hero {
   padding: 40px 0 28px;
@@ -229,7 +227,7 @@ nav a.active {
   color: #e3e8ff;
 }
 
-/* optional “glass” treatment if you want to wrap hero content in .hero-glass */
+/* optional glass wrapper */
 .hero-glass {
   border-radius: 24px;
   padding: 24px 22px;
@@ -242,7 +240,7 @@ nav a.active {
   -webkit-backdrop-filter: blur(18px);
 }
 
-/* Profile area in hero – circular image sitting above the card */
+/* Profile area in hero */
 .hero-profile-wrapper {
   max-width: 260px;
   margin: 0 auto 16px;
@@ -265,7 +263,7 @@ nav a.active {
   display: block;
 }
 
-/* Hero motion – subtle float for the “What I typically do” card */
+/* Floating hero card (used on some pages) */
 .hero-card {
   background: rgba(5, 10, 30, 0.9);
   border-radius: 18px;
@@ -288,6 +286,17 @@ nav a.active {
   color: #dde5ff;
 }
 
+/* ---------- Section caption (Apple-style label) ---------- */
+
+.section-caption {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  margin-left: 2px;
+}
+
 /* ---------- Scroll Reveal Animations ---------- */
 
 .reveal {
@@ -303,7 +312,6 @@ nav a.active {
   transform: translateY(0);
 }
 
-/* Stagger effect support if applied via JS */
 .reveal[data-delay="1"] { transition-delay: 0.05s; }
 .reveal[data-delay="2"] { transition-delay: 0.1s; }
 .reveal[data-delay="3"] { transition-delay: 0.15s; }
@@ -317,14 +325,14 @@ nav a.active {
 /* ---------- Main content & cards ---------- */
 
 main {
-  padding: 32px 0 46px;
+  padding: 36px 0 52px;
 }
 
 section {
-  margin-bottom: 26px;
+  margin-bottom: 32px;
 }
 
-/* Alternating “Apple-style” rhythm */
+/* Alternating background */
 section:nth-of-type(even) .card {
   background-color: #f8f9ff;
 }
@@ -335,8 +343,8 @@ section:nth-of-type(odd) .card {
 .card {
   border-radius: 18px;
   padding: 22px 22px 24px;
-  border: 1px solid var(--border);
-  box-shadow: 0 10px 24px rgba(9, 12, 38, 0.16);
+  border: 1px solid rgba(215, 222, 234, 0.9);
+  box-shadow: var(--shadow-soft);
   position: relative;
   overflow: hidden;
   transition:
@@ -360,8 +368,8 @@ section:nth-of-type(odd) .card {
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(9, 12, 38, 0.18);
-  border-color: rgba(27, 60, 146, 0.36);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+  border-color: rgba(27, 60, 146, 0.32);
   background-color: #ffffff;
 }
 
@@ -493,8 +501,8 @@ section:nth-of-type(odd) .card {
 }
 
 .gallery-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.24);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.2);
 }
 
 .gallery-item img {
@@ -510,7 +518,7 @@ section:nth-of-type(odd) .card {
   font-size: 12px;
 }
 
-/* Back link under sports / travel */
+/* Back link */
 .back-link {
   margin-top: 24px;
   font-size: 13px;
@@ -559,11 +567,11 @@ section:nth-of-type(odd) .card {
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.75);
 }
 
-/* theme toggle button (for dark/light mode) */
+/* theme toggle button */
 .theme-toggle-btn {
   position: fixed;
   right: 16px;
-  bottom: 70px; /* just above back-to-top */
+  bottom: 70px;
   width: 40px;
   height: 40px;
   border-radius: 999px;
@@ -611,7 +619,6 @@ body.dark-mode header {
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.75);
 }
 
-/* tint the blurred header shapes slightly differently in dark mode */
 body.dark-mode header::before {
   background: radial-gradient(circle at center,
     rgba(129, 140, 248, 0.85),
@@ -664,7 +671,6 @@ body.dark-mode .pill {
   border-color: #475569;
 }
 
-/* dark-mode gradients for sports/travel hero cards */
 body.dark-mode .sports-hero,
 body.dark-mode .travel-hero {
   background: radial-gradient(circle at top left,
@@ -731,7 +737,6 @@ body.dark-mode .theme-toggle-btn {
     margin-top: 20px;
   }
 
-  /* Force profile photo to be a small circular thumbnail */
   .profile-photo {
     width: 130px;
     height: 130px;
