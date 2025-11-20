@@ -124,7 +124,7 @@
             <h3>What I focus on</h3>
             <ul>
               <li>Delivering end-to-end PLM implementations, from discovery and architecture through go-live and support.</li>
-              <li>Designing integrations that keep parts, BOMs and changes aligned across PLM, ERP, ALM, MES and QMS..</li>
+              <li>Designing integrations that keep parts, BOMs and changes aligned across PLM, ERP, ALM, MES and QMS.</li>
               <li>Strengthening change and configuration management for regulated and complex product environments.</li>
               <li>Balancing business needs, technical constraints and long-term maintainability in solution design.</li>
             </ul>
@@ -154,7 +154,7 @@
         </p>
 
         <p>
-          I enjoy working in the space between business and technology running workshops, clarifying requirements, performing fit-gap analysis and working with technical teams to ensure solutions are practical, testable and supportable. I like simplifying complex landscapes and aligning tools, data and processes so teams can deliver without constantly firefighting integrations.
+          I enjoy working in the space between business and technology, running workshops, clarifying requirements, performing fit-gap analysis and working with technical teams to ensure solutions are practical, testable and supportable. I like simplifying complex landscapes and aligning tools, data and processes so teams can deliver without constantly firefighting integrations.
         </p>
 
         <p>
@@ -267,7 +267,7 @@
 
         <ul class="pill-list" style="margin-top:14px;">
           <li class="pill">PLM-ERP-ALM-MES integrations</li>
-          <li class="pill">eBOM and mBOM and change management</li>
+          <li class="pill">eBOM, mBOM and change management</li>
           <li class="pill">Compliance and traceability</li>
           <li class="pill">Solution architecture and governance</li>
           <li class="pill">Requirements and stakeholder management</li>
@@ -400,20 +400,37 @@
   const LIGHT_FAVICON = 'images/favicon-rk-logo.png';
   const DARK_FAVICON  = 'images/favicon-rk-logo-dark.png';
 
+  const THEME_KEY = 'rk-theme';
+
   function setTheme(isDark) {
     if (isDark) {
       body.classList.add('dark-mode');
       toggleBtn.textContent = DARK_ICON;
       if (faviconLink) faviconLink.href = DARK_FAVICON;
+      localStorage.setItem(THEME_KEY, 'dark');
     } else {
       body.classList.remove('dark-mode');
       toggleBtn.textContent = LIGHT_ICON;
       if (faviconLink) faviconLink.href = LIGHT_FAVICON;
+      localStorage.setItem(THEME_KEY, 'light');
     }
   }
 
-  // default: dark mode
-  setTheme(true);
+  // Determine initial theme: saved preference > system preference > default dark
+  (function initTheme() {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === 'dark') {
+      setTheme(true);
+      return;
+    }
+    if (saved === 'light') {
+      setTheme(false);
+      return;
+    }
+    const prefersDark = window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(prefersDark || true);
+  })();
 
   toggleBtn.addEventListener('click', () => {
     const currentlyDark = body.classList.contains('dark-mode');
