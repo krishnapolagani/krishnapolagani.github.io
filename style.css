@@ -677,6 +677,12 @@ body.dark-mode nav a:focus {
   color: #f9fafb;
 }
 
+body.dark-mode .card:hover {
+  background-color: #0a1025 !important; /* slightly lighter dark background */
+  border-color: #334155;               /* soft slate border */
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6); /* subtle hover lift */
+}
+
 /* Ensure all sections/cards share same dark card background */
 body.dark-mode section {
   --card-bg: #020617;
