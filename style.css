@@ -38,6 +38,10 @@ body {
   background-color: var(--bg);
   color: var(--text-main);
   line-height: 1.6;
+  /* smooth theme change */
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 /* Utility container */
@@ -57,6 +61,8 @@ header {
   box-shadow: 0 18px 40px rgba(7, 12, 32, 0.65);
   overflow: hidden;
   z-index: 0;
+  /* smooth theme change */
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* soft blurred “Apple-like” shapes behind the hero */
@@ -69,6 +75,7 @@ header::after {
   opacity: 0.85;
   pointer-events: none;
   z-index: -1;
+  /* parallax-ready */
   transform: translateY(var(--hero-parallax, 0px));
   transition: transform 0.06s linear;
 }
@@ -459,6 +466,14 @@ section:nth-of-type(odd) .card {
   padding-top: 16px;
 }
 
+/* soft hero gradients for secondary pages */
+.sports-hero,
+.travel-hero {
+  background: radial-gradient(circle at top left,
+              rgba(27, 60, 146, 0.08),
+              #ffffff);
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -544,7 +559,7 @@ section:nth-of-type(odd) .card {
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.75);
 }
 
-/* NEW: theme toggle button (for dark/light mode) */
+/* theme toggle button (for dark/light mode) */
 .theme-toggle-btn {
   position: fixed;
   right: 16px;
@@ -647,6 +662,14 @@ body.dark-mode .pill {
   background: rgba(15, 23, 42, 0.9);
   color: #e5e7ff;
   border-color: #475569;
+}
+
+/* dark-mode gradients for sports/travel hero cards */
+body.dark-mode .sports-hero,
+body.dark-mode .travel-hero {
+  background: radial-gradient(circle at top left,
+              rgba(59, 130, 246, 0.2),
+              #020617);
 }
 
 body.dark-mode footer {
