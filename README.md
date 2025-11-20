@@ -19,6 +19,7 @@ It is built using pure HTML, CSS, and small JavaScript enhancements, and deploye
 │   │   ├── Sports/
 │   │   └── Travel/
 ├── index.html
+├── blogs.html
 ├── travel.html
 ├── sports.html
 ├── style.css
