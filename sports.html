@@ -2,22 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>RK Polagani | Sports Enthusiast</title>
+  <title>RK Polagani | Sports & Fitness</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Sports interests and experiences of Ramakrishna (RK) Polagani." />
+  <meta name="description" content="Sports interests, experiences, and inspirations of Ramakrishna (RK) Polagani — cricket, baseball, Formula 1, fitness, and more." />
   <link rel="stylesheet" href="style.css">
+
+  <!-- Page-specific polish -->
+  <style>
+    .sports-hero {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .sports-hero h1 {
+      font-size: 2.1rem;
+    }
+
+    .sports-list .card {
+      box-shadow: none;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+    }
+
+    .gallery-item .caption {
+      font-size: 0.85rem;
+      margin-top: 6px;
+      color: var(--text-muted);
+    }
+  </style>
 </head>
 <body>
 
-<!-- Header (matches index.html) -->
+<!-- Header -->
 <header>
   <div class="container">
     <div class="top-bar">
-
       <a href="index.html" class="brand">
         <span class="brand-mark">RK</span> POLAGANI
       </a>
-
       <nav>
         <a href="index.html">Home</a>
         <a href="index.html#about">About</a>
@@ -28,63 +63,61 @@
         <a href="travel.html">Travelling</a>
         <a href="sports.html" class="active">Sports</a>
       </nav>
-
     </div>
   </div>
 </header>
 
-
 <main class="container">
 
-  <!-- Page Title -->
+  <!-- Hero -->
   <section class="reveal">
-    <div class="card">
+    <div class="card sports-hero">
       <h1 style="margin-bottom:10px;">Sports & Fitness</h1>
-      <p class="card-subtitle">Passion, energy, discipline, and inspiration through sports.</p>
-
+      <p class="card-subtitle">
+        Energy, discipline, and inspiration — on and off the field.
+      </p>
       <p>
-        Sports have always been a big part of my life — not just entertainment, but a source of
-        motivation, teamwork, focus, and resilience. Whether it's the strategy in a tight cricket chase,
-        the atmosphere of a Blue Jays game, or the precision of Formula 1 racing,
-        every sport brings its own excitement and lessons.
+        Sports have always been a big part of my life. They bring balance, competition, teamwork,
+        and a sense of rhythm to my routine. From the intensity of IPL cricket to the tactical
+        pauses in baseball and the engineering brilliance of Formula 1  every sport brings
+        something unique that inspires me personally and professionally.
+      </p>
+      <p>
+        Whether I’m watching SRH at a stadium, cheering for the Blue Jays in Toronto, or following
+        the precision of Max Verstappen in F1  sports keep me motivated and grounded.
       </p>
     </div>
   </section>
 
-
-  <!-- Interests Section -->
+  <!-- Interests -->
   <section class="reveal">
     <div class="section-caption">Interests</div>
     <div class="card">
-      <h2>Sports I follow or play</h2>
+      <h2>Sports I Follow Closely</h2>
 
       <div class="sports-list">
 
-        <!-- Cricket -->
         <div class="card">
-          <h3>Cricket – Sunrisers Hyderabad (SRH)</h3>
+          <h3>Cricket — Sunrisers Hyderabad (SRH)</h3>
           <p>
-            I'm a dedicated supporter of SRH. I enjoy the strategic side of T20 cricket — from powerplay
-            momentum to death-over execution. SRH's bowling strength and comeback performances always keep
-            matches exciting.
+            A long-standing SRH supporter. I enjoy the strategic chess-like feel of T20 cricket 
+            powerplays, strike rotations, death bowling, and momentum shifts that can change a match in minutes.
           </p>
         </div>
 
-        <!-- Baseball -->
         <div class="card">
-          <h3>Baseball – Toronto Blue Jays</h3>
+          <h3>Baseball — Toronto Blue Jays</h3>
           <p>
-            Watching the Blue Jays introduced me to baseball's tactical depth. I enjoy the pitching battles,
-            big home-run moments, and the electric atmosphere at Rogers Centre.
+            Moving to Canada introduced me to baseball. The atmosphere at Rogers Centre, the crowd chants,
+            and the pitcher–batter duels make it a sport that’s both relaxing and tense at the same time.
           </p>
         </div>
 
-        <!-- Formula 1 -->
         <div class="card">
-          <h3>Formula 1 – Max Verstappen</h3>
+          <h3>Formula 1 — Max Verstappen</h3>
           <p>
-            Max Verstappen’s driving style — aggressive, calculated, and relentlessly competitive —
-            makes every race exciting. F1 combines engineering excellence with raw driver skill.
+            F1 combines elite engineering with fearless driving. Max Verstappen’s aggressive yet controlled style
+            makes every race worth watching. Strategy, tyre management, and team coordination are all part of the thrill.
           </p>
         </div>
 
@@ -92,28 +125,30 @@
     </div>
   </section>
 
-
-  <!-- Gallery Section -->
+  <!-- Gallery -->
   <section class="reveal">
     <div class="section-caption">Gallery</div>
     <div class="card">
-      <h2>Sports Photos</h2>
+      <h2>Sports Moments</h2>
+      <p style="font-size:0.9rem; color:var(--text-muted);">
+        Some moments from stadiums, live games, and experiences over the years.
+      </p>
 
       <div class="gallery">
 
         <div class="gallery-item">
-          <img src="images/cricket.jpg" alt="Cricket photo" />
-          <div class="caption">Enjoying cricket moments — SRH matches and IPL highlights.</div>
+          <img src="assets/images/Sports/cricket.jpg" alt="Cricket moments" />
+          <div class="caption">IPL energy  SRH matches, super overs, and memorable comebacks.</div>
         </div>
 
         <div class="gallery-item">
-          <img src="images/baseball.jpg" alt="Baseball photo" />
-          <div class="caption">Toronto Blue Jays — big moments and stadium atmosphere.</div>
+          <img src="assets/images/Sports/baseball.jpg" alt="Blue Jays baseball" />
+          <div class="caption">Blue Jays at Rogers Centre  the roar of a full stadium.</div>
         </div>
 
         <div class="gallery-item">
-          <img src="images/f1.jpg" alt="Formula 1 photo" />
-          <div class="caption">F1 action — Max Verstappen on track.</div>
+          <img src="assets/images/Sports/f1.jpg" alt="Formula 1 race" />
+          <div class="caption">Max Verstappen speed, precision, and championship mindset.</div>
         </div>
 
       </div>
@@ -126,17 +161,15 @@
 
 </main>
 
-
 <footer>
   <div class="container">
-    © <span id="year"></span> Ramakrishna (RK) Polagani
+    © <span id="year"></span> Ramakrishna (RK) Polagani · Sports
   </div>
 </footer>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Scroll Reveal Logic (matches index.html)
   const revealElements = document.querySelectorAll('.reveal');
   const revealOnScroll = () => {
     revealElements.forEach(el => {
