@@ -6,6 +6,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Travelling experiences of Ramakrishna (RK) Polagani – from a first solo journey to Leh Ladakh in 2017 to exploring new cultures and landscapes across India and beyond." />
   <link rel="stylesheet" href="style.css">
+
+  <!-- Page-specific styling for a clean, Apple-like layout -->
+  <style>
+    .travel-hero {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .travel-hero h1 {
+      font-size: 2.1rem;
+    }
+
+    .travel-hero .card-subtitle {
+      font-size: 1rem;
+    }
+
+    .travel-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .travel-timeline .card {
+      box-shadow: none;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+    }
+
+    .gallery-item .caption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .back-link {
+      margin-top: 18px;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
 
@@ -34,7 +86,7 @@
 
     <!-- Intro section -->
     <section class="reveal">
-      <div class="card">
+      <div class="card travel-hero">
         <h1 style="margin-bottom:10px;">Travelling Experiences</h1>
         <p class="card-subtitle">
           A journey that started in 2017 with a solo trip to Leh Ladakh — and hasn’t really stopped.
@@ -55,9 +107,9 @@
     <section class="reveal">
       <div class="section-caption">Travel Journey</div>
       <div class="card">
-        <h2>Key trips & moments</h2>
+        <h2>Key trips &amp; moments</h2>
 
-        <div class="travel-list">
+        <div class="travel-timeline">
 
           <!-- 2017 – Leh Ladakh -->
           <div class="card">
@@ -65,12 +117,12 @@
             <div class="item-meta">Leh &amp; Ladakh, India · 2017</div>
             <p>
               My travel story really began in 2017, when I took a solo trip from Hyderabad to Leh Ladakh.
-              Coming from South India, it felt like stepping into a completely different world  cold weather,
+              Coming from South India, it felt like stepping into a completely different world — cold weather,
               high altitude, new food, and a culture that was different but incredibly warm and welcoming.
             </p>
             <p>
               During the trip I met travellers from across India and abroad. Even though I started alone,
-              it never really felt like a “solo” journey  conversations at small cafes, shared taxis, and
+              it never really felt like a “solo” journey — conversations at small cafes, shared taxis, and
               long bus rides turned strangers into temporary travel companions.
             </p>
             <p>
@@ -87,12 +139,13 @@
 
           <!-- Placeholder for future trips -->
           <div class="card">
-            <h3>More journeys to come</h3>
+            <h3>More journeys since then</h3>
             <div class="item-meta">India &amp; Beyond · 2018 – Present</div>
             <p>
-              Since that first trip, I’ve continued exploring new places  from different parts of India
-              to my current life in Canada. I’ll keep adding more stories, photos, and reflections here as
-              I document them properly instead of just keeping them in my phone gallery.
+              Since that first trip, I’ve continued exploring new places — from different parts of India
+              to my current life in Canada. Some trips are short weekend breaks, others are longer journeys
+              that stay with you for years. As I document them properly, I’ll keep adding more stories and
+              photos here instead of just leaving them in my phone gallery.
             </p>
           </div>
 
@@ -106,49 +159,51 @@
       <div class="card">
         <h2>Leh Ladakh Moments</h2>
         <p style="font-size:0.9rem; color:var(--text-muted);">
-          A few photos from that first solo journey. Replace the image filenames below with your actual
-          Leh Ladakh photos (for example, from your ride to Pangong Lake or the high passes).
+          A few photos from that first solo journey — from curious marmots to cold blue lakes and high passes.
         </p>
-    <div class="gallery">
-      <!-- Marmot photo -->
-      <div class="gallery-item">
-        <img src="assets/images/Travel/leh-marmot.JPG" alt="Marmot in the mountains near Ladakh" />
-        <div class="caption">
-          A curious marmot along the way – a reminder that you share the mountains with more than just travellers.
-        </div>
-      </div>
 
-      <!-- Pangong Lake -->
-      <div class="gallery-item">
-        <img src="assets/images/Travel/leh-pangong-lake.JPG" alt="Pangong Lake in Ladakh" />
-        <div class="caption">
-          Pangong Lake – calm blue water, cold wind, and a view that makes the entire journey worth it.
-        </div>
-      </div>
+        <div class="gallery">
+          <!-- Marmot photo -->
+          <div class="gallery-item">
+            <img src="assets/images/Travel/leh-marmot.JPG" alt="Marmot in the mountains near Ladakh" />
+            <div class="caption">
+              A curious marmot along the way – a reminder that you share the mountains with more than just travellers.
+            </div>
+          </div>
 
-      <!-- You riding bike through mountains -->
-      <div class="gallery-item">
-        <img src="assets/images/Travel/leh-bike-mountains.jpg" alt="RK riding a bike through the mountains in Ladakh" />
-        <div class="caption">
-          Riding through the mountain roads – solo on paper, but surrounded by landscapes that keep you moving.
-        </div>
-      </div>
+          <!-- Pangong Lake -->
+          <div class="gallery-item">
+            <img src="assets/images/Travel/leh-pangong-lake.JPG" alt="Pangong Lake in Ladakh" />
+            <div class="caption">
+              Pangong Lake – calm blue water, cold wind, and a view that makes the entire journey worth it.
+            </div>
+          </div>
 
-      <!-- Ladakh mountains landscape -->
-      <div class="gallery-item">
-        <img src="assets/images/Travel/leh-mountain-range.JPG" alt="Ladakh mountain range" />
-        <div class="caption">
-          Ladakh’s mountain range – wide, quiet, and completely different from life back in Hyderabad.
+          <!-- You riding bike through mountains -->
+          <div class="gallery-item">
+            <img src="assets/images/Travel/leh-bike-mountains.jpg" alt="RK riding a bike through the mountains in Ladakh" />
+            <div class="caption">
+              Riding through the mountain roads – solo on paper, but surrounded by landscapes that keep you moving.
+            </div>
+          </div>
+
+          <!-- Ladakh mountains landscape -->
+          <div class="gallery-item">
+            <img src="assets/images/Travel/leh-mountain-range.JPG" alt="Ladakh mountain range" />
+            <div class="caption">
+              Ladakh’s mountain range – wide, quiet, and completely different from life back in Hyderabad.
+            </div>
+          </div>
+
+          <!-- Mighty Changla Pass -->
+          <div class="gallery-item">
+            <img src="assets/images/Travel/leh-changla-pass.JPG" alt="Mighty Changla Pass" />
+            <div class="caption">
+              Mighty Changla Pass — one of the highest motorable passes, with cold winds and breathtaking views.
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  <!-- Mighty Changla Pass -->
-  <div class="gallery-item">
-    <img src="assets/images/Travel/leh-changla-pass.JPG" alt="Mighty Changla Pass" />
-    <div class="caption">
-      Mighty Changla Pass — one of the highest motorable passes, cold winds and breathtaking views.
-    </div>
-  </div>
 
       <div class="back-link">
         ← <a href="index.html">Back to main profile</a>
