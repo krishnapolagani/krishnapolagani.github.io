@@ -234,5 +234,23 @@
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll();
   </script>
+
+  <!-- Theme toggle button -->
+<button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">☾</button>
+
+<!-- Theme toggle script -->
+<script>
+  const body = document.body;
+  const toggleBtn = document.getElementById('themeToggle');
+
+  // default = dark mode
+  if (!body.classList.contains('dark-mode')) {
+    body.classList.add('dark-mode');
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+  });
+</script>
 </body>
 </html>
