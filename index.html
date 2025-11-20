@@ -77,28 +77,29 @@
       </nav>
     </div>
 
-    <!-- Hero: two-column layout -->
+    <!-- New hero layout: text on the left, compact profile tile on the right -->
     <div class="hero">
-      <div class="hero-grid reveal" data-delay="1">
-        <!-- Left: text -->
-        <div>
+      <div class="hero-grid">
+
+        <!-- Left: main intro text -->
+        <div class="hero-main-text reveal" data-delay="1">
           <h1>Ramakrishna Polagani (RK)</h1>
           <h2>PLM Techno-functional Architect and Business Systems Analyst</h2>
 
           <p>
-            I help engineering, manufacturing, quality and IT teams connect their product data,
+            I help engineering, manufacturing, quality and IT teams connect their product data
             from early design all the way to manufacturing and change. My focus is on building
             a reliable digital thread across PLM, ERP, ALM, MES and QMS so decisions are based
             on clean, consistent and traceable information.
           </p>
           <p>
-            This site is also a personal sandbox where I experiment with clean layouts using
-            simple HTML, CSS and a bit of JavaScript.
+            This site is also a personal project where I design and build everything myself
+            using HTML, CSS and a bit of JavaScript.
           </p>
 
           <div class="tag-list">
             <span class="tag">Teamcenter and Agile PLM</span>
-            <span class="tag">PLM - ERP - ALM - MES integration</span>
+            <span class="tag">PLM ERP ALM MES integration</span>
             <span class="tag">Digital thread and traceability</span>
             <span class="tag">Business analysis and architecture</span>
           </div>
@@ -108,9 +109,9 @@
           </a>
         </div>
 
-        <!-- Right: photo + focus card -->
-        <div>
-          <div class="hero-profile-wrapper" style="margin-bottom:16px;">
+        <!-- Right: compact profile tile -->
+        <aside class="hero-card reveal" data-delay="2">
+          <div class="hero-profile-wrapper">
             <img
               src="assets/images/Profile/IMG-8092.JPG"
               alt="Ramakrishna Polagani"
@@ -118,71 +119,85 @@
               loading="lazy"
             >
           </div>
-
-          <div class="hero-card">
-            <h3>What I focus on</h3>
-            <ul>
-              <li>End to end PLM implementations, from discovery and architecture to go live and support.</li>
-              <li>Integrations that keep parts, BOMs and changes in sync between PLM, ERP, ALM, MES and QMS.</li>
-              <li>Change and configuration management that supports regulated and complex products.</li>
-              <li>Solution design that balances business needs, technical reality and long term supportability.</li>
-            </ul>
+          <div class="hero-card-body">
+            <p class="hero-card-title">Based in Canada</p>
+            <p class="hero-card-line">Working with cross functional teams on PLM and integration roadmaps.</p>
+            <p class="hero-card-line">Currently focusing on medical devices and digital operations.</p>
           </div>
-        </div>
+        </aside>
+
       </div>
     </div>
-
   </div>
 </header>
 
 <main>
   <div class="container">
 
+    <!-- Focus / What I typically do -->
+    <section class="reveal" data-delay="1">
+      <div class="section-caption">Focus</div>
+      <div class="card">
+        <h2>What I work on</h2>
+        <p class="card-subtitle">The type of work I usually lead or support.</p>
+        <ul>
+          <li><strong>PLM implementations:</strong> End to end PLM rollouts from discovery workshops and architecture through configuration, testing and go live.</li>
+          <li><strong>PLM ERP ALM MES integrations:</strong> Integration design and governance using T4X and T4O, Oracle Fusion Middleware, APIs and Power Platform to keep BOMs, parts and change data in sync.</li>
+          <li><strong>Change and configuration management:</strong> Designing and improving change flows, approvals and traceability for regulated and complex products.</li>
+          <li><strong>Solution design and governance:</strong> Translating business needs into scalable architectures, interface designs and standards that hold up over time.</li>
+          <li><strong>Stakeholder collaboration:</strong> Working across engineering, manufacturing, quality, IT and operations to align processes, data models and tools.</li>
+        </ul>
+      </div>
+    </section>
+
     <!-- ABOUT -->
     <section id="about" class="reveal" data-delay="1">
+      <div class="section-caption">Profile</div>
       <div class="card">
         <h2>About</h2>
-        <p class="card-subtitle">A quick view of my background and how I like to work.</p>
+        <p class="card-subtitle">Who I am and how I work.</p>
 
         <p>
-          I am a PLM techno-functional architect and business systems analyst with more than
+          I am a PLM Techno-functional Architect and Business Systems Analyst with more than
           fourteen years of experience delivering PLM implementations and integrations across
           medical devices, hi-tech, aerospace, semiconductor, industrial equipment, consumer goods
           and healthcare.
         </p>
 
         <p>
-          My core strengths are in Siemens Teamcenter, Oracle Agile PLM, PTC Windchill and
-          MechWorks PDM, combined with hands-on integration work using T4X and T4O, Oracle
-          Fusion Middleware, APIs and Power Platform. I design integration patterns that connect PLM
-          with ERP systems such as Oracle EBS, Syspro, SAP and Microsoft Dynamics, as well as ALM,
-          MES and QMS platforms.
+          My core strengths are in Siemens Teamcenter, Oracle Agile PLM,
+          PTC Windchill and MechWorks PDM, combined with hands on integration work
+          using T4X and T4O, Oracle Fusion Middleware, APIs and
+          Power Platform. I design integration patterns that connect PLM with
+          ERP systems such as Oracle EBS, Syspro, SAP and Microsoft Dynamics,
+          as well as ALM, MES and QMS, to create a reliable digital thread.
         </p>
 
         <p>
-          I enjoy working in the space between business and IT. I run workshops, clarify requirements,
-          perform fit gap analysis and then work with technical teams to make sure solutions are practical,
-          testable and supportable. I like simplifying complex landscapes and aligning tools, data and
-          processes so teams can focus on delivery instead of constantly firefighting integrations.
+          I am comfortable working between business and IT: leading workshops, clarifying requirements,
+          running fit gap analysis and then working with technical teams to make sure solutions are practical,
+          testable and supportable. I like simplifying complex landscapes and aligning tools, data and processes
+          so teams can focus on delivery instead of constantly firefighting integrations.
         </p>
 
         <p>
-          Outside work I enjoy travelling and following sports. Both influence how I think about teamwork,
-          resilience and continuous improvement when I work with cross functional and global teams.
+          Outside work I enjoy travelling and following sports. Both of these influence how I think about teamwork,
+          resilience and continuous improvement when working with cross functional and global teams.
         </p>
       </div>
     </section>
 
     <!-- EXPERIENCE -->
     <section id="experience" class="reveal" data-delay="1">
+      <div class="section-caption">Experience</div>
       <div class="card">
-        <h2>Experience</h2>
-        <p class="card-subtitle">Where I have worked and the themes across those roles.</p>
+        <h2>Experience snapshot</h2>
+        <p class="card-subtitle">Where I have worked and what I focus on.</p>
         <div class="two-col">
           <div>
             <div class="item">
               <div class="item-title">Business Systems Analyst / PLM Functional Lead</div>
-              <div class="item-meta">StarFish Medical, Canada, Sep 2023 - present</div>
+              <div class="item-meta">StarFish Medical, Canada, Sep 2023 to present</div>
               <ul>
                 <li>Lead cross functional workshops with engineering, manufacturing, quality and finance to define PLM and PDM strategies and digital operations roadmaps.</li>
                 <li>Design functional architecture and integration patterns connecting MechWorks PDM, Syspro ERP, QMS and ALM (Polarion) for end to end product data flow.</li>
@@ -194,7 +209,7 @@
 
             <div class="item">
               <div class="item-title">PLM Consultant / Solution Architect</div>
-              <div class="item-meta">Infosys, Canada and India, Jul 2016 - Sep 2023</div>
+              <div class="item-meta">Infosys, Canada and India, Jul 2016 to Sep 2023</div>
               <ul>
                 <li>Designed and implemented Siemens Teamcenter and Oracle Agile PLM solutions for global aerospace, hi-tech and industrial clients.</li>
                 <li>Built integration frameworks using T4O and Oracle Fusion Middleware to synchronize parts, BOMs and change data between PLM and ERP systems.</li>
@@ -206,7 +221,7 @@
 
             <div class="item">
               <div class="item-title">Senior Software Engineer, PLM Systems</div>
-              <div class="item-meta">Tech Mahindra, India, Aug 2011 - Jun 2016</div>
+              <div class="item-meta">Tech Mahindra, India, Aug 2011 to Jun 2016</div>
               <ul>
                 <li>Implemented and supported Oracle Agile PLM 9.3.x including configuration, custom extensions, web services and integrations with Oracle EBS.</li>
                 <li>Developed BMIDE extensions and services in Siemens Teamcenter to support complex change workflows and integration scenarios.</li>
@@ -225,7 +240,7 @@
                 <li>Solution architecture, interface design and data mapping across multiple enterprise platforms.</li>
                 <li>Test strategy, UAT coordination, defect triage and release validation.</li>
                 <li>Documentation, training and change management to drive adoption and reduce support overhead.</li>
-                <li>Close collaboration with distributed and global teams and stakeholders across business and IT.</li>
+                <li>Collaboration with distributed and global teams and stakeholders across business and IT.</li>
               </ul>
             </div>
           </div>
@@ -235,6 +250,7 @@
 
     <!-- SKILLS -->
     <section id="skills" class="reveal" data-delay="1">
+      <div class="section-caption">Skills</div>
       <div class="card">
         <h2>Skills and tools</h2>
         <p class="card-subtitle">Platforms, domains and ways of working.</p>
@@ -245,7 +261,7 @@
               <li>Siemens Teamcenter (BMIDE, T4X, T4O, AIG, SOA services).</li>
               <li>Oracle Agile PLM (SDK, events, web services, ACS, Averify).</li>
               <li>PTC Windchill, MechWorks PDM, Arena PLM.</li>
-              <li>Siemens Polarion ALM administration and ALM - PLM - ERP connectivity.</li>
+              <li>Siemens Polarion ALM administration and ALM PLM ERP connectivity.</li>
             </ul>
 
             <h3 style="font-size:14px;">Enterprise systems and collaboration</h3>
@@ -258,7 +274,7 @@
           <div>
             <h3 style="margin-top:0;font-size:14px;">Integration, automation and delivery</h3>
             <ul>
-              <li>T4X ecosystem (T4O, T4S, T4EA) for PLM - ERP integration.</li>
+              <li>T4X ecosystem (T4O, T4S, T4EA) for PLM ERP integration.</li>
               <li>Oracle Fusion Middleware, WebLogic and API gateway integrations.</li>
               <li>REST and SOAP web services, XML and JSON mapping, AIG Pipeline Designer.</li>
               <li>Power Automate, Power Platform, MuleSoft, scripting (Tcl, shell, Bash, Perl).</li>
@@ -267,16 +283,16 @@
             <h3 style="font-size:14px;">Analysis, data and web</h3>
             <ul>
               <li>Business analysis, requirements engineering, fit gap and process mapping.</li>
-              <li>SQL, Oracle PL/SQL, Unix and Linux, data migration and ETL concepts.</li>
+              <li>SQL, Oracle PL SQL, Unix and Linux, data migration and ETL concepts.</li>
               <li>Reporting and analytics with Power BI and Tableau.</li>
-              <li>SDLC, ITIL, Agile and Waterfall, DevOps and CI/CD, UAT and test strategy.</li>
-              <li>HTML5, CSS3 and vanilla JavaScript for this site and small internal tools.</li>
+              <li>SDLC, ITIL, Agile and Waterfall, DevOps and CI CD, UAT and test strategy.</li>
+              <li>HTML5, CSS3 and JavaScript for this site and small internal tools.</li>
             </ul>
           </div>
         </div>
 
         <ul class="pill-list" style="margin-top:14px;">
-          <li class="pill">PLM - ERP - ALM - MES integrations</li>
+          <li class="pill">PLM ERP ALM MES integrations</li>
           <li class="pill">eBOM and mBOM and change management</li>
           <li class="pill">Compliance and traceability</li>
           <li class="pill">Solution architecture and governance</li>
@@ -288,12 +304,13 @@
 
     <!-- PROJECTS -->
     <section id="projects" class="reveal" data-delay="1">
+      <div class="section-caption">Projects</div>
       <div class="card">
         <h2>Selected projects</h2>
         <p class="card-subtitle">Examples of PLM and integration outcomes.</p>
 
         <div class="item">
-          <div class="item-title">Unified PLM - ERP digital thread for medical devices</div>
+          <div class="item-title">Unified PLM ERP digital thread for medical devices</div>
           <div class="item-meta">Role: Business Systems Analyst / PLM Functional Lead</div>
           <ul>
             <li>Defined PLM and PDM integration roadmap connecting MechWorks PDM, PLM, Syspro ERP, QMS and ALM for end to end product data flow.</li>
@@ -340,6 +357,7 @@
 
     <!-- CONTACT -->
     <section id="contact" class="reveal" data-delay="1">
+      <div class="section-caption">Contact</div>
       <div class="card">
         <h2>Contact</h2>
         <p class="card-subtitle">Best ways to reach me.</p>
@@ -352,15 +370,18 @@
               linkedin.com/in/ramakrishna-polagani-67297ab8
             </a>
           </span>
-          <span>Resume:
-            <a href="assets/Ramakrishna-Polagani-Resume.pdf" target="_blank" rel="noopener">
-              PDF download
-            </a>
-          </span>
         </div>
         <p style="margin-top:12px;font-size:13px;color:var(--text-muted);">
           I am open to conversations about PLM, enterprise integrations and ways to improve how organizations design,
           build and manage products using a connected digital thread.
+        </p>
+
+        <!-- Resume link as a simple text link, no button -->
+        <p style="margin-top:16px;font-size:13px;">
+          Resume:
+          <a href="assets/Ramakrishna-Polagani-Resume.pdf" target="_blank" rel="noopener">
+            Download PDF
+          </a>
         </p>
       </div>
     </section>
