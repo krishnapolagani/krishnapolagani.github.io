@@ -12,7 +12,7 @@
   --text-muted: #6f7a8a;
   --border: #d7deea;
 
-  --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.12);
+  --shadow-soft: 0 10px 28px rgba(11, 20, 46, 0.14);
 }
 
 /* ---------- Global reset & base ---------- */
@@ -38,7 +38,6 @@ body {
   background-color: var(--bg);
   color: var(--text-main);
   line-height: 1.6;
-  /* smooth theme change */
   transition:
     background-color 0.25s ease,
     color 0.25s ease;
@@ -57,7 +56,7 @@ header {
   position: relative;
   background: linear-gradient(135deg, #0a1a44, #1b3c92);
   color: #ffffff;
-  padding: 22px 0 30px;
+  padding: 26px 0 34px;
   box-shadow: 0 18px 40px rgba(7, 12, 32, 0.65);
   overflow: hidden;
   z-index: 0;
@@ -121,7 +120,6 @@ header::after {
   text-decoration: none;
 }
 
-/* Keep support for RK badge */
 .brand::before {
   content: none;
 }
@@ -179,10 +177,10 @@ nav a.active {
   color: var(--primary-dark);
 }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero (index main header area) ---------- */
 
 .hero {
-  padding: 40px 0 28px;
+  padding: 56px 0 36px;
 }
 
 .hero-grid {
@@ -227,7 +225,7 @@ nav a.active {
   color: #e3e8ff;
 }
 
-/* optional glass wrapper */
+/* optional glass treatment if used */
 .hero-glass {
   border-radius: 24px;
   padding: 24px 22px;
@@ -243,10 +241,13 @@ nav a.active {
 /* Profile area in hero */
 .hero-profile-wrapper {
   max-width: 260px;
-  margin: 0 auto 16px;
-  padding: 14px 14px 18px;
-  border-radius: 18px;
-  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.22), rgba(15, 23, 42, 0.4));
+  margin: 0 auto 20px;
+  padding: 16px 16px 20px;
+  border-radius: 24px;
+  background: radial-gradient(circle at top,
+    rgba(255, 255, 255, 0.22),
+    rgba(15, 23, 42, 0.4)
+  );
   border: 1px solid rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
@@ -263,11 +264,11 @@ nav a.active {
   display: block;
 }
 
-/* Floating hero card (used on some pages) */
+/* Hero motion */
 .hero-card {
   background: rgba(5, 10, 30, 0.9);
-  border-radius: 18px;
-  padding: 18px 18px 20px;
+  border-radius: 24px;
+  padding: 20px 20px 22px;
   border: 1px solid rgba(148, 163, 184, 0.75);
   box-shadow: 0 20px 45px rgba(4, 7, 20, 0.82);
   animation: hero-float 10s ease-in-out infinite;
@@ -286,15 +287,14 @@ nav a.active {
   color: #dde5ff;
 }
 
-/* ---------- Section caption (Apple-style label) ---------- */
+/* ---------- Section captions (label above cards) ---------- */
 
 .section-caption {
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-size: 12px;
   text-transform: uppercase;
+  letter-spacing: 0.14em;
   color: var(--text-muted);
-  margin-bottom: 8px;
-  margin-left: 2px;
+  margin: 0 0 10px 2px;
 }
 
 /* ---------- Scroll Reveal Animations ---------- */
@@ -325,14 +325,14 @@ nav a.active {
 /* ---------- Main content & cards ---------- */
 
 main {
-  padding: 36px 0 52px;
+  padding: 40px 0 52px;
 }
 
 section {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
-/* Alternating background */
+/* Alternating rhythm */
 section:nth-of-type(even) .card {
   background-color: #f8f9ff;
 }
@@ -341,10 +341,10 @@ section:nth-of-type(odd) .card {
 }
 
 .card {
-  border-radius: 18px;
-  padding: 22px 22px 24px;
-  border: 1px solid rgba(215, 222, 234, 0.9);
-  box-shadow: var(--shadow-soft);
+  border-radius: 24px;
+  padding: 26px 24px 26px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 30px rgba(9, 12, 38, 0.16);
   position: relative;
   overflow: hidden;
   transition:
@@ -367,8 +367,8 @@ section:nth-of-type(odd) .card {
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(9, 12, 38, 0.18);
   border-color: rgba(27, 60, 146, 0.32);
   background-color: #ffffff;
 }
@@ -462,7 +462,8 @@ section:nth-of-type(odd) .card {
 /* ---------- Sports / Travel helpers ---------- */
 
 .sports-list,
-.travel-list {
+.travel-list,
+.blog-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
@@ -470,18 +471,21 @@ section:nth-of-type(odd) .card {
 }
 
 .sports-list .card,
-.travel-list .card {
+.travel-list .card,
+.blog-list .card {
   padding-top: 16px;
 }
 
 /* soft hero gradients for secondary pages */
 .sports-hero,
-.travel-hero {
+.travel-hero,
+.blogs-hero {
   background: radial-gradient(circle at top left,
               rgba(27, 60, 146, 0.08),
               #ffffff);
 }
 
+/* Gallery */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -492,7 +496,7 @@ section:nth-of-type(odd) .card {
 .gallery-item {
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 26px rgba(9, 12, 38, 0.18);
   transition:
@@ -501,8 +505,8 @@ section:nth-of-type(odd) .card {
 }
 
 .gallery-item:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.24);
 }
 
 .gallery-item img {
@@ -518,7 +522,7 @@ section:nth-of-type(odd) .card {
   font-size: 12px;
 }
 
-/* Back link */
+/* Back link under sports / travel / blogs */
 .back-link {
   margin-top: 24px;
   font-size: 13px;
@@ -567,7 +571,7 @@ section:nth-of-type(odd) .card {
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.75);
 }
 
-/* theme toggle button */
+/* theme toggle button (for dark/light mode) */
 .theme-toggle-btn {
   position: fixed;
   right: 16px;
@@ -619,6 +623,7 @@ body.dark-mode header {
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.75);
 }
 
+/* tint the blurred header shapes in dark mode */
 body.dark-mode header::before {
   background: radial-gradient(circle at center,
     rgba(129, 140, 248, 0.85),
@@ -643,25 +648,20 @@ body.dark-mode nav a:focus {
   color: #f9fafb;
 }
 
-body.dark-mode .hero-card {
-  background: rgba(15, 23, 42, 0.96);
-  border-color: #1e293b;
-}
-
-body.dark-mode section:nth-of-type(even) .card {
-  background-color: #020617;
-}
+body.dark-mode section:nth-of-type(even) .card,
 body.dark-mode section:nth-of-type(odd) .card {
   background-color: #020617;
 }
 
 body.dark-mode .card {
   border-color: #1e293b;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
 }
 
 body.dark-mode .card-subtitle,
 body.dark-mode .item-meta,
-body.dark-mode .caption {
+body.dark-mode .caption,
+body.dark-mode .section-caption {
   color: #94a3b8;
 }
 
@@ -671,8 +671,10 @@ body.dark-mode .pill {
   border-color: #475569;
 }
 
+/* dark-mode gradients for hero cards */
 body.dark-mode .sports-hero,
-body.dark-mode .travel-hero {
+body.dark-mode .travel-hero,
+body.dark-mode .blogs-hero {
   background: radial-gradient(circle at top left,
               rgba(59, 130, 246, 0.2),
               #020617);
@@ -718,7 +720,7 @@ body.dark-mode .theme-toggle-btn {
   }
 
   main {
-    padding-top: 24px;
+    padding-top: 28px;
   }
 
   .two-col {
@@ -726,7 +728,7 @@ body.dark-mode .theme-toggle-btn {
   }
 
   .hero {
-    padding-top: 30px;
+    padding-top: 40px;
   }
 
   .hero h1 {
