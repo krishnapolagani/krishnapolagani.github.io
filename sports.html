@@ -199,7 +199,16 @@
     setTheme(!currentlyDark);
   });
 </script>
+<!-- Parallax glow effect -->
+<script>
+  const updateParallax = () => {
+    const offset = window.scrollY * 0.18;
+    document.documentElement.style.setProperty('--hero-parallax', `${-offset}px`);
+  };
 
+  window.addEventListener('scroll', updateParallax);
+  updateParallax();
+</script>
 
 </body>
 </html>
