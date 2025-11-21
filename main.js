@@ -90,11 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* -------- Toronto Weather (OpenWeatherMap) -------- */
 
-  // ▼▼▼  API KEY ▼▼▼
-  const OPENWEATHER_API_KEY = "2ab143c2b961e5d504d3ee9a46173d58";  
+    /* -------- Toronto Weather (OpenWeatherMap) -------- */
 
+  // Your API key
+  const OPENWEATHER_API_KEY = "2ab143c2b961e5d504d3ee9a46173d58";
 
   const torontoTimeEl = document.getElementById("toronto-time");
   const torontoWeatherEl = document.getElementById("toronto-weather");
@@ -107,11 +107,16 @@ document.addEventListener('DOMContentLoaded', () => {
       timeZone: "America/Toronto",
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit"
+      second: "2-digit",
+      hour12: true
     };
 
     const formatter = new Intl.DateTimeFormat([], options);
-    torontoTimeEl.textContent = formatter.format(new Date());
+    let formatted = formatter.format(new Date());
+    // Turn "p.m." / "a.m." into "PM" / "AM"
+    formatted = formatted.replace(" a.m.", " AM").replace(" p.m.", " PM");
+
+    torontoTimeEl.textContent = formatted;
   }
 
   if (torontoTimeEl) {
@@ -131,24 +136,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
       console.log("Weather response:", res.status, data);
 
-      if (!res.ok || !data || !data.main || !data.weather) {
+      if (!res.ok || !data || !data.main || !data.weather || !data.weather.length) {
         torontoWeatherEl.textContent = "Weather N/A";
         return;
       }
 
       const temp = Math.round(data.main.temp);
       const desc = data.weather[0].description;
+      const icon = data.weather[0].icon; // e.g. "01d"
 
-      torontoWeatherEl.textContent = `${temp}°C, ${desc}`;
+      // Build a richer layout with icon + temp + description
+      torontoWeatherEl.innerHTML = `
+        <span class="toronto-weather-temp">${temp}°C</span>
+        <span class="toronto-weather-icon">
+          <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}">
+        </span>
+        <span class="toronto-weather-desc">${desc}</span>
+      `;
     } catch (err) {
-      console.error("Weather error:", err);
+      console.error("Weather error", err);
       torontoWeatherEl.textContent = "Weather N/A";
     }
   }
 
   if (torontoWeatherEl) {
     loadTorontoWeather();
-    setInterval(loadTorontoWeather, 10 * 60 * 1000);
+    setInterval(loadTorontoWeather, 10 * 60 * 1000); // update every 10 min
   }
+
 
 });
