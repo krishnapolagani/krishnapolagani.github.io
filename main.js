@@ -110,60 +110,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* -------- Toronto time & weather -------- */
-  const torontoTimeEl = document.getElementById('toronto-time');
-  const torontoWeatherEl = document.getElementById('toronto-weather');
+  /* -------- Toronto Weather (OpenWeatherMap) -------- */
 
-  // Toronto time (America/Toronto timezone)
-  function updateTorontoTime() {
-    if (!torontoTimeEl) return;
+// 1. Put your API key here (inside quotes)
+const OPENWEATHER_API_KEY = "2ab143c2b961e5d504d3ee9a46173d58";
 
-    const options = {
-      timeZone: 'America/Toronto',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    };
+// Toronto Time & Weather Elements
+const torontoTimeEl = document.getElementById("toronto-time");
+const torontoWeatherEl = document.getElementById("toronto-weather");
 
-    const formatter = new Intl.DateTimeFormat([], options);
-    torontoTimeEl.textContent = formatter.format(new Date());
-  }
+// ---- Toronto Time ----
+function updateTorontoTime() {
+  if (!torontoTimeEl) return;
 
-  if (torontoTimeEl) {
-    updateTorontoTime();
-    setInterval(updateTorontoTime, 1000);
-  }
+  const options = {
+    timeZone: "America/Toronto",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  };
 
-  // Toronto weather (OpenWeatherMap)
-  const OPENWEATHER_API_KEY = 'YOUR_API_KEY_HERE'; // <-- replace with your API key
+  const formatter = new Intl.DateTimeFormat([], options);
+  torontoTimeEl.textContent = formatter.format(new Date());
+}
 
-  async function loadTorontoWeather() {
-    if (!torontoWeatherEl || !OPENWEATHER_API_KEY) return;
+if (torontoTimeEl) {
+  updateTorontoTime();
+  setInterval(updateTorontoTime, 1000);
+}
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?id=6167865&units=metric&appid=${2ab143c2b961e5d504d3ee9a46173d58}`;
+// ---- Toronto Weather ----
+async function loadTorontoWeather() {
+  if (!torontoWeatherEl) return;
 
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
+  const url = `https://api.openweathermap.org/data/2.5/weather?id=6167865&units=metric&appid=${OPENWEATHER_API_KEY}`;
 
-      if (!data || !data.main || !data.weather || !data.weather.length) {
-        torontoWeatherEl.textContent = 'Weather N/A';
-        return;
-      }
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
 
-      const temp = Math.round(data.main.temp);
-      const desc = data.weather[0].description;
+    console.log("Weather response:", res.status, data);
 
-      torontoWeatherEl.textContent = `${temp}°C, ${desc}`;
-    } catch (err) {
-      console.error('Weather error', err);
-      torontoWeatherEl.textContent = 'Weather N/A';
+    // Error handling: missing data or invalid key
+    if (!res.ok || !data || !data.main || !data.weather) {
+      torontoWeatherEl.textContent = "Weather N/A";
+      return;
     }
-  }
 
-  if (torontoWeatherEl) {
-    loadTorontoWeather();
-    // Refresh every 10 minutes
-    setInterval(loadTorontoWeather, 10 * 60 * 1000);
+    const temp = Math.round(data.main.temp);
+    const desc = data.weather[0].description;
+
+    torontoWeatherEl.textContent = `${temp}°C, ${desc}`;
+  } catch (err) {
+    console.error("Weather error", err);
+    torontoWeatherEl.textContent = "Weather N/A";
   }
+}
+
+if (torontoWeatherEl) {
+  loadTorontoWeather();
+  setInterval(loadTorontoWeather, 10 * 60 * 1000); // update every 10 minutes
+}
 });
