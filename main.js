@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* -------- Toronto Weather (OpenWeatherMap) -------- */
 
   // Your API key
-  const OPENWEATHER_API_KEY = "f91c3e386d2c95bfb46556f7d7832710";
+  const OPENWEATHER_API_KEY = "2ab143c2b961e5d504d3ee9a46173d58";
 
   const torontoTimeEl = document.getElementById("toronto-time");
   const torontoWeatherEl = document.getElementById("toronto-weather");
