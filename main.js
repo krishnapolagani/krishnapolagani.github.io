@@ -109,4 +109,61 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  /* -------- Toronto time & weather -------- */
+  const torontoTimeEl = document.getElementById('toronto-time');
+  const torontoWeatherEl = document.getElementById('toronto-weather');
+
+  // Toronto time (America/Toronto timezone)
+  function updateTorontoTime() {
+    if (!torontoTimeEl) return;
+
+    const options = {
+      timeZone: 'America/Toronto',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    };
+
+    const formatter = new Intl.DateTimeFormat([], options);
+    torontoTimeEl.textContent = formatter.format(new Date());
+  }
+
+  if (torontoTimeEl) {
+    updateTorontoTime();
+    setInterval(updateTorontoTime, 1000);
+  }
+
+  // Toronto weather (OpenWeatherMap)
+  const OPENWEATHER_API_KEY = 'YOUR_API_KEY_HERE'; // <-- replace with your API key
+
+  async function loadTorontoWeather() {
+    if (!torontoWeatherEl || !OPENWEATHER_API_KEY) return;
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?id=6167865&units=metric&appid=${OPENWEATHER_API_KEY}`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!data || !data.main || !data.weather || !data.weather.length) {
+        torontoWeatherEl.textContent = 'Weather N/A';
+        return;
+      }
+
+      const temp = Math.round(data.main.temp);
+      const desc = data.weather[0].description;
+
+      torontoWeatherEl.textContent = `${temp}°C, ${desc}`;
+    } catch (err) {
+      console.error('Weather error', err);
+      torontoWeatherEl.textContent = 'Weather N/A';
+    }
+  }
+
+  if (torontoWeatherEl) {
+    loadTorontoWeather();
+    // Refresh every 10 minutes
+    setInterval(loadTorontoWeather, 10 * 60 * 1000);
+  }
 });
