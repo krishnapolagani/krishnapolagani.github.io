@@ -181,18 +181,45 @@ nav a.active {
 /* ---------- Toronto time & weather ---------- */
 
 .toronto-meta {
-  margin-left: auto;             /* pushes it to the right on wide screens */
+  margin-left: auto;
   font-size: 12px;
   color: #dde5ff;
-  opacity: 0.85;
+  opacity: 0.9;
   white-space: nowrap;
   text-align: right;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* Dark mode treatment */
+.toronto-label {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.toronto-separator {
+  opacity: 0.7;
+}
+
+.toronto-weather-temp {
+  font-weight: 500;
+}
+
+.toronto-weather-icon img {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  border-radius: 999px;
+}
+
+/* Dark mode */
 body.dark-mode .toronto-meta {
   color: #e2e8f0;
 }
+
 
 /* ---------- Hero (index main header area) ---------- */
 
