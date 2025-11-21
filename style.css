@@ -841,6 +841,7 @@ body.dark-mode footer {
 
 /* ---------- Mobile tweaks ---------- */
 
+
 @media (max-width: 720px) {
   .hero-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -880,10 +881,14 @@ body.dark-mode footer {
   .hero-profile-wrapper {
     margin-top: 20px;
   }
-    .toronto-meta {
-    margin-left: 0;
-    align-self: flex-end;
+
+  /* ▼ Add these for Toronto meta on small screens ▼ */
+  .toronto-meta {
     font-size: 11px;
-    margin-top: 4px;
+    gap: 4px;
+  }
+
+  .toronto-label {
+    display: none; /* hide 'Toronto •' on very small screens */
   }
 }
