@@ -104,7 +104,7 @@ header::after {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  flex-wrap: wrap; /* NEW: allow wrapping on smaller widths */
+  flex-wrap: wrap; /* allow wrapping on narrower widths */
 }
 
 /* ---------- Brand / Logo ---------- */
@@ -186,8 +186,6 @@ nav a.active {
   color: #dde5ff;
   opacity: 0.9;
   white-space: nowrap;
-  text-align: right;
-
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -215,11 +213,9 @@ nav a.active {
   border-radius: 999px;
 }
 
-/* Dark mode */
 body.dark-mode .toronto-meta {
   color: #e2e8f0;
 }
-
 
 /* ---------- Hero (index main header area) ---------- */
 
@@ -839,10 +835,33 @@ body.dark-mode footer {
   color: #64748b;
 }
 
-/* ---------- Mobile tweaks ---------- */
-
+/* ---------- Mobile tweaks (UPDATED) ---------- */
 
 @media (max-width: 720px) {
+  /* Keep brand + weather in the top row, nav wraps below */
+  .top-bar {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  nav {
+    flex-basis: 100%;
+    order: 2;
+    margin-top: 10px;
+    justify-content: flex-start;
+  }
+
+  .toronto-meta {
+    order: 1;
+    margin-left: auto;
+    font-size: 11px;
+    gap: 4px;
+  }
+
+  .toronto-label {
+    display: none; /* hide 'Toronto •' on very small screens */
+  }
+
   .hero-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
@@ -850,16 +869,6 @@ body.dark-mode footer {
 
   .hero-card {
     margin: 0 auto;
-  }
-
-  .top-bar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  nav {
-    margin-top: 10px;
-    justify-content: flex-start;
   }
 
   main {
@@ -880,15 +889,5 @@ body.dark-mode footer {
 
   .hero-profile-wrapper {
     margin-top: 20px;
-  }
-
-  /* ▼ Add these for Toronto meta on small screens ▼ */
-  .toronto-meta {
-    font-size: 11px;
-    gap: 4px;
-  }
-
-  .toronto-label {
-    display: none; /* hide 'Toronto •' on very small screens */
   }
 }
