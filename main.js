@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+
   /* -------- Footer year -------- */
   const yearEl = document.getElementById('year');
   if (yearEl) {
@@ -19,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       { threshold: 0.12 }
     );
-
     revealEls.forEach(el => observer.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('reveal-visible'));
@@ -32,10 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const LIGHT_ICON = '☾';
   const DARK_ICON  = '☀️';
-
   const LIGHT_FAVICON = 'images/favicon-rk-logo.png';
   const DARK_FAVICON  = 'images/favicon-rk-logo-dark.png';
-
   const THEME_KEY = 'rk-theme';
 
   function applyTheme(isDark, persist = true) {
@@ -56,17 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
     (function initTheme() {
       const saved = localStorage.getItem(THEME_KEY);
 
-      if (saved === 'dark') {
-        applyTheme(true, false);
-        return;
-      }
+      if (saved === 'dark') return applyTheme(true, false);
+      if (saved === 'light') return applyTheme(false, false);
 
-      if (saved === 'light') {
-        applyTheme(false, false);
-        return;
-      }
-
-      // No saved preference: respect system preference, fallback to dark
       const prefersDark =
         window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -75,8 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
     toggleBtn.addEventListener('click', () => {
-      const currentlyDark = body.classList.contains('dark-mode');
-      applyTheme(!currentlyDark);
+      applyTheme(!body.classList.contains('dark-mode'));
     });
   }
 
@@ -84,91 +73,82 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTopBtn = document.getElementById('backToTop');
 
   function handleScroll() {
-    // Back to top visibility
     if (backToTopBtn) {
-      if (window.scrollY > 280) {
-        backToTopBtn.classList.add('show');
-      } else {
-        backToTopBtn.classList.remove('show');
-      }
+      backToTopBtn.classList.toggle('show', window.scrollY > 280);
     }
 
-    // Parallax glow on header background
     const offset = window.scrollY * 0.18;
     document.documentElement.style.setProperty('--hero-parallax', `${-offset}px`);
   }
 
   window.addEventListener('scroll', handleScroll);
-  handleScroll(); // initial position
+  handleScroll();
 
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
   /* -------- Toronto Weather (OpenWeatherMap) -------- */
 
-// 1. Put your API key here (inside quotes)
-const OPENWEATHER_API_KEY = "2ab143c2b961e5d504d3ee9a46173d58";
+  // ▼▼▼  API KEY ▼▼▼
+  const OPENWEATHER_API_KEY = "2ab143c2b961e5d504d3ee9a46173d58";  
 
-// Toronto Time & Weather Elements
-const torontoTimeEl = document.getElementById("toronto-time");
-const torontoWeatherEl = document.getElementById("toronto-weather");
 
-// ---- Toronto Time ----
-function updateTorontoTime() {
-  if (!torontoTimeEl) return;
+  const torontoTimeEl = document.getElementById("toronto-time");
+  const torontoWeatherEl = document.getElementById("toronto-weather");
 
-  const options = {
-    timeZone: "America/Toronto",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  };
+  /* ---- Toronto Time ---- */
+  function updateTorontoTime() {
+    if (!torontoTimeEl) return;
 
-  const formatter = new Intl.DateTimeFormat([], options);
-  torontoTimeEl.textContent = formatter.format(new Date());
-}
+    const options = {
+      timeZone: "America/Toronto",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    };
 
-if (torontoTimeEl) {
-  updateTorontoTime();
-  setInterval(updateTorontoTime, 1000);
-}
-
-// ---- Toronto Weather ----
-async function loadTorontoWeather() {
-  if (!torontoWeatherEl) return;
-
-  const url = `https://api.openweathermap.org/data/2.5/weather?id=6167865&units=metric&appid=${OPENWEATHER_API_KEY}`;
-
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-
-    console.log("Weather response:", res.status, data);
-
-    // Error handling: missing data or invalid key
-    if (!res.ok || !data || !data.main || !data.weather) {
-      torontoWeatherEl.textContent = "Weather N/A";
-      return;
-    }
-
-    const temp = Math.round(data.main.temp);
-    const desc = data.weather[0].description;
-
-    torontoWeatherEl.textContent = `${temp}°C, ${desc}`;
-  } catch (err) {
-    console.error("Weather error", err);
-    torontoWeatherEl.textContent = "Weather N/A";
+    const formatter = new Intl.DateTimeFormat([], options);
+    torontoTimeEl.textContent = formatter.format(new Date());
   }
-}
 
-if (torontoWeatherEl) {
-  loadTorontoWeather();
-  setInterval(loadTorontoWeather, 10 * 60 * 1000); // update every 10 minutes
-}
+  if (torontoTimeEl) {
+    updateTorontoTime();
+    setInterval(updateTorontoTime, 1000);
+  }
+
+  /* ---- Toronto Weather ---- */
+  async function loadTorontoWeather() {
+    if (!torontoWeatherEl) return;
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?id=6167865&units=metric&appid=${OPENWEATHER_API_KEY}`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      console.log("Weather response:", res.status, data);
+
+      if (!res.ok || !data || !data.main || !data.weather) {
+        torontoWeatherEl.textContent = "Weather N/A";
+        return;
+      }
+
+      const temp = Math.round(data.main.temp);
+      const desc = data.weather[0].description;
+
+      torontoWeatherEl.textContent = `${temp}°C, ${desc}`;
+    } catch (err) {
+      console.error("Weather error:", err);
+      torontoWeatherEl.textContent = "Weather N/A";
+    }
+  }
+
+  if (torontoWeatherEl) {
+    loadTorontoWeather();
+    setInterval(loadTorontoWeather, 10 * 60 * 1000);
+  }
+
 });
