@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadTorontoWeather() {
     if (!torontoWeatherEl || !OPENWEATHER_API_KEY) return;
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?id=6167865&units=metric&appid=${OPENWEATHER_API_KEY}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?id=6167865&units=metric&appid=${2ab143c2b961e5d504d3ee9a46173d58}`;
 
     try {
       const res = await fetch(url);
