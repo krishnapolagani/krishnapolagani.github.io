@@ -330,24 +330,6 @@ nav a.active {
 
 body.dark-mode .toronto-meta { color: #e2e8f0; }
 
-/* =========================================================
-   ✅ TOP BAR FIX: hide empty segments + auto separators
-   Works with updated HTML:
-     - elements with class="segment" + data-seg
-     - weather segment starts hidden
-   ========================================================= */
-.toronto-meta .segment[hidden] {
-  display: none !important;
-}
-
-.toronto-meta .segment:not([hidden]) + .segment:not([hidden])::before {
-  content: "|";
-  display: inline-block;
-  margin: 0 8px 0 6px;
-  opacity: 0.7;
-  transform: translateY(-0.5px);
-}
-
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex;
