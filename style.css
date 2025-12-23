@@ -219,6 +219,20 @@ nav a.active {
   font-size: 11px;
   opacity: 0.8;
 }
+/* Used by updated HTML */
+.toronto-dot { opacity: 0.8; margin-right: 2px; }
+
+/* Fix: hide empty segments + auto separators (prevents | |) */
+.toronto-meta .segment[hidden] { display: none !important; }
+
+.toronto-meta .segment:not([hidden]) + .segment:not([hidden])::before {
+  content: "|";
+  display: inline-block;
+  margin: 0 8px 0 6px;
+  opacity: 0.7;
+  transform: translateY(-0.5px);
+}
+
 
 /* kept (won’t break even if unused) */
 .toronto-separator { opacity: 0.7; }
