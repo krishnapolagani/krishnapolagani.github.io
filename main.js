@@ -159,52 +159,51 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(loadTorontoWeather, 10 * 60 * 1000);
   }
 
-  /* -------- Metals (Gold + Silver in CAD) -------- */
+    /* -------- Precious Metals (Gold/Silver) in CAD -------- */
   const metalsInlineEl = document.getElementById("metals-inline");
 
   async function loadMetalsCAD() {
     if (!metalsInlineEl) return;
 
+    // show something immediately
+    metalsInlineEl.textContent = "Loading...";
+
     try {
-      // Gold/Silver prices are returned in USD; convert to CAD using USD->CAD FX
       const [goldRes, silverRes, fxRes] = await Promise.all([
         fetch("https://api.gold-api.com/price/XAU"),
         fetch("https://api.gold-api.com/price/XAG"),
         fetch("https://api.exchangerate.host/latest?base=USD&symbols=CAD")
       ]);
 
-      const [gold, silver, fx] = await Promise.all([
+      const [goldData, silverData, fxData] = await Promise.all([
         goldRes.json(),
         silverRes.json(),
         fxRes.json()
       ]);
 
-      const rate = fx && fx.rates && fx.rates.CAD ? fx.rates.CAD : null;
-      if (!goldRes.ok || !silverRes.ok || !fxRes.ok || !rate || !gold.price || !silver.price) {
-        metalsInlineEl.textContent = "N/A";
-        return;
+      const usdToCad = fxData?.rates?.CAD;
+      const goldUsd = goldData?.price;
+      const silverUsd = silverData?.price;
+
+      if (!usdToCad || !goldUsd || !silverUsd) {
+        throw new Error("Unexpected API response");
       }
 
-      const goldCad = gold.price * rate;
-      const silverCad = silver.price * rate;
+      const goldCad = goldUsd * usdToCad;
+      const silverCad = silverUsd * usdToCad;
 
-      const fmt0 = new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
-      const fmt2 = new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD", minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-      metalsInlineEl.innerHTML = `
-        <span class="metals-item"><strong>Au</strong> ${fmt0.format(goldCad)}/oz</span>
-        <span class="metals-dot">·</span>
-        <span class="metals-item"><strong>Ag</strong> ${fmt2.format(silverCad)}/oz</span>
-      `;
-    } catch (e) {
-      console.error("Metals error", e);
+      metalsInlineEl.textContent =
+        `Gold C$${goldCad.toFixed(0)}/oz • Silver C$${silverCad.toFixed(2)}/oz`;
+    } catch (err) {
+      console.error("Metals error:", err);
       metalsInlineEl.textContent = "N/A";
     }
   }
 
   if (metalsInlineEl) {
     loadMetalsCAD();
-    setInterval(loadMetalsCAD, 10 * 60 * 1000); // refresh every 10 minutes
+    setInterval(loadMetalsCAD, 5 * 60 * 1000); // refresh every 5 mins
   }
+
 
 });
