@@ -198,7 +198,7 @@ nav a.active {
   font-size: 12px;
   color: #dde5ff;
   opacity: 0.9;
-  white-space: nowrap;
+  white-space: nowrap; /* desktop stays on one line */
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -221,7 +221,7 @@ nav a.active {
   border-radius: 999px;
 }
 
-/* ---------- Metals inline (NEW) ---------- */
+/* ---------- Metals inline (kept) ---------- */
 .metals-label {
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -231,6 +231,24 @@ nav a.active {
 
 .metals-inline {
   font-weight: 500;
+  white-space: nowrap;
+  display: inline-flex;          /* ✅ align like weather */
+  align-items: center;           /* ✅ baseline alignment */
+  gap: 6px;                      /* ✅ spacing between pills */
+}
+
+/* ✅ NEW: Metals pills (used by your JS output) */
+.metals-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.2;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   white-space: nowrap;
 }
 
@@ -315,11 +333,10 @@ body.dark-mode .toronto-meta { color: #e2e8f0; }
   max-width: 650px;
 }
 
-/* keep long copy readable */
+/* ✅ FIX: keep copy readable but DON’T constrain grid containers */
 .hero-main-text,
 .card p,
-.card ul,
-.card .two-col {
+.card ul {
   max-width: var(--prose);
 }
 
@@ -715,7 +732,6 @@ footer {
 
 /* ---------- Dark mode (refined) ---------- */
 body.dark-mode {
-  /* Core tokens for dark theme */
   --bg: #050815;
   --card-bg: #020617;
   --text-main: #e5e7ff;
@@ -754,16 +770,13 @@ body.dark-mode nav a:focus {
   color: #f9fafb;
 }
 
-/* All sections use the dark card background */
 body.dark-mode section { --card-bg: #020617; }
 
-/* Cards in dark mode */
 body.dark-mode .card {
   border-color: #1e293b;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
 }
 
-/* Card hover – subtle lift, still dark */
 body.dark-mode .card:hover {
   background-color: #0d1228 !important;
   border-color: #475569;
@@ -771,7 +784,6 @@ body.dark-mode .card:hover {
   transform: translateY(-1px);
 }
 
-/* Text / metadata */
 body.dark-mode .card-subtitle,
 body.dark-mode .item-meta,
 body.dark-mode .caption,
@@ -779,14 +791,12 @@ body.dark-mode .section-caption {
   color: #94a3b8;
 }
 
-/* Tags in hero */
 body.dark-mode .tag {
   background: rgba(15, 23, 42, 0.9);
   border-color: rgba(148, 163, 184, 0.7);
   color: #e5e7ff;
 }
 
-/* Pills / chips */
 body.dark-mode .pill {
   background: rgba(15, 23, 42, 0.92);
   color: #e5e7ff;
@@ -799,7 +809,6 @@ body.dark-mode .pill:hover {
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.7);
 }
 
-/* Hero elements */
 body.dark-mode .hero-profile-wrapper {
   background: radial-gradient(circle at top,
     rgba(15, 23, 42, 0.9),
@@ -818,14 +827,12 @@ body.dark-mode .hero-card {
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9);
 }
 
-/* Secondary page hero gradients */
 body.dark-mode .sports-hero,
 body.dark-mode .travel-hero,
 body.dark-mode .blogs-hero {
   background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), #020617);
 }
 
-/* Links in contact / back-links */
 body.dark-mode .contact-row a,
 body.dark-mode .back-link a {
   color: #c7d2fe;
@@ -836,14 +843,12 @@ body.dark-mode .back-link a:hover {
   color: #e0e7ff;
 }
 
-/* Gallery cards */
 body.dark-mode .gallery-item {
   background: #020617;
   border-color: #1f2933;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
 }
 
-/* Back to top & theme toggle buttons */
 body.dark-mode .back-to-top-btn {
   background: rgba(15, 23, 42, 1);
   color: #f9fafb;
@@ -857,7 +862,6 @@ body.dark-mode .theme-toggle-btn {
   border-color: #1e293b;
 }
 
-/* Footer */
 body.dark-mode footer {
   background-color: #020617;
   border-top-color: #1e293b;
@@ -866,7 +870,6 @@ body.dark-mode footer {
 
 /* ---------- Mobile tweaks (UPDATED) ---------- */
 @media (max-width: 720px) {
-  /* Keep brand + weather on the SAME row */
   .top-bar {
     display: flex;
     flex-wrap: wrap;
@@ -875,17 +878,24 @@ body.dark-mode footer {
 
   .brand { order: 0; }
 
+  /* ✅ FIX: allow wrapping so Silver isn't cut off */
   .toronto-meta {
     order: 1;
     margin-left: auto;
     font-size: 11px;
-    gap: 4px;
-    white-space: nowrap;
+    gap: 6px;
+    white-space: normal;      /* ✅ was nowrap */
+    flex-wrap: wrap;          /* ✅ allow wrap */
+    justify-content: flex-end;
+    text-align: right;
   }
 
-  /* NOTE: Toronto + Metals labels are NOT hidden on mobile (per your request) */
+  /* ✅ make pills slightly smaller on mobile */
+  .metals-pill {
+    font-size: 10.5px;
+    padding: 2px 7px;
+  }
 
-  /* Put navigation on its own row below */
   nav {
     order: 2;
     flex-basis: 100%;
@@ -909,4 +919,11 @@ body.dark-mode footer {
   .hero h1 { font-size: 32px; }
 
   .hero-profile-wrapper { margin-top: 20px; }
+
+  /* ✅ FIX: remove big “right side empty space” on mobile */
+  .card p,
+  .card ul,
+  .hero-main-text {
+    max-width: 100%;
+  }
 }
