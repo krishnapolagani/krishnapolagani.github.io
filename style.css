@@ -242,6 +242,26 @@ nav a.active {
   align-items: center;           /* ✅ baseline alignment */
   gap: 6px;                      /* ✅ spacing between pills */
 }
+/* ✅ Time pill (match weather/metals) */
+.time-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.2;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  white-space: nowrap;
+}
+
+/* Mobile sizing to match others */
+@media (max-width: 720px) {
+  .time-pill { font-size: 10.5px; padding: 2px 7px; }
+}
+
 /* ✅ Weather pill (match metals pills) */
 .weather-pill {
   display: inline-flex;
