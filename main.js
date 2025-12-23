@@ -106,13 +106,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const offset = window.scrollY * 0.18;
     document.documentElement.style.setProperty('--hero-parallax', `${-offset}px`);
+      if (topBarWrap) {
+  topBarWrap.classList.toggle("is-scrolled", window.scrollY > 10);
+}
   }
 
   window.addEventListener('scroll', handleScroll);
   handleScroll();
-  if (topBarWrap) {
-  topBarWrap.classList.toggle("is-scrolled", window.scrollY > 10);
-}
+
 
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
