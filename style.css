@@ -221,6 +221,19 @@ nav a.active {
   border-radius: 999px;
 }
 
+/* ---------- Metals inline (NEW) ---------- */
+.metals-label {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.metals-inline {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 body.dark-mode .toronto-meta { color: #e2e8f0; }
 
 /* ---------- Buttons (NEW) ---------- */
@@ -257,6 +270,14 @@ body.dark-mode .toronto-meta { color: #e2e8f0; }
 .btn--ghost:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-1px);
+}
+
+/* Hero CTA wrapper (NEW) */
+.hero-cta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 /* ---------- Hero (index main header area) ---------- */
@@ -862,7 +883,7 @@ body.dark-mode footer {
     white-space: nowrap;
   }
 
-  .toronto-label { display: none; }
+  /* NOTE: Toronto + Metals labels are NOT hidden on mobile (per your request) */
 
   /* Put navigation on its own row below */
   nav {
