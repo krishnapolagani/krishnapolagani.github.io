@@ -1092,3 +1092,222 @@ body.dark-mode footer {
 
   .timeline-item::before { top: 16px; }
 }
+/* =========================================================
+   Apple-style polish pack
+   (Sticky glass header + Value props + Carousel)
+   ========================================================= */
+
+/* Sticky glass header wrapper */
+.top-bar-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 12px 0;
+  background: rgba(10, 26, 68, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Stronger “Apple-like” glass once you scroll */
+.top-bar-wrap.is-scrolled {
+  background: rgba(10, 26, 68, 0.55);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.22);
+}
+
+/* Ensure your header padding doesn’t look huge with sticky bar */
+header {
+  padding-top: 0;
+}
+
+/* --- Value Props --- */
+.value-props {
+  margin: 18px 0 6px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.value-prop {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border-radius: 18px;
+  padding: 12px 12px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.20);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.value-prop:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,0.26);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.26);
+}
+
+.value-prop-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #ffffff;
+  flex: 0 0 auto;
+}
+
+.value-prop-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.value-prop-title {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 4px;
+}
+
+.value-prop-text {
+  font-size: 13px;
+  color: rgba(227, 232, 255, 0.92);
+  line-height: 1.35;
+}
+
+/* --- Featured Projects Carousel --- */
+.carousel-wrap {
+  position: relative;
+  margin: 14px 0 18px;
+  padding: 6px 44px; /* room for buttons */
+}
+
+.carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 2px 10px;
+}
+
+.carousel::-webkit-scrollbar { height: 8px; }
+.carousel::-webkit-scrollbar-thumb {
+  background: rgba(27, 60, 146, 0.25);
+  border-radius: 999px;
+}
+body.dark-mode .carousel::-webkit-scrollbar-thumb {
+  background: rgba(226, 232, 240, 0.18);
+}
+
+.carousel-card {
+  scroll-snap-align: start;
+  min-width: 320px;
+  max-width: 420px;
+  flex: 0 0 auto;
+  text-decoration: none;
+  color: inherit;
+
+  border-radius: 22px;
+  padding: 16px 16px;
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(27, 60, 146, 0.18);
+  box-shadow: 0 18px 44px rgba(9, 12, 38, 0.16);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.carousel-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(27,60,146,0.32);
+  box-shadow: 0 24px 60px rgba(9, 12, 38, 0.20);
+}
+
+.carousel-kicker {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(31, 37, 51, 0.60);
+  margin-bottom: 6px;
+}
+
+.carousel-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.carousel-meta {
+  font-size: 12px;
+  color: rgba(31, 37, 51, 0.62);
+  margin-bottom: 10px;
+}
+
+.carousel-bullets {
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(31, 37, 51, 0.78);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+/* Carousel buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.45);
+  background: rgba(248,250,252,0.85);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.14);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  z-index: 2;
+}
+
+.carousel-btn:hover {
+  transform: translateY(-50%) scale(1.03);
+  box-shadow: 0 18px 38px rgba(0,0,0,0.18);
+}
+
+.carousel-btn.prev { left: 8px; }
+.carousel-btn.next { right: 8px; }
+
+body.dark-mode .carousel-card {
+  background: rgba(2, 6, 23, 0.92);
+  border-color: rgba(148,163,184,0.18);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.55);
+}
+body.dark-mode .carousel-kicker,
+body.dark-mode .carousel-meta,
+body.dark-mode .carousel-bullets {
+  color: rgba(226,232,240,0.72);
+}
+body.dark-mode .carousel-title { color: rgba(226,232,240,0.95); }
+
+body.dark-mode .carousel-btn {
+  background: rgba(15,23,42,0.85);
+  color: rgba(226,232,240,0.95);
+  border-color: rgba(148,163,184,0.22);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .value-props { grid-template-columns: 1fr; }
+  .carousel-wrap { padding: 6px 0; }
+  .carousel-btn { display: none; } /* swipe instead */
+  .carousel-card { min-width: 280px; }
+}
+
