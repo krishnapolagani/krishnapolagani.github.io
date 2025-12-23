@@ -112,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const formatter = new Intl.DateTimeFormat([], options);
     let formatted = formatter.format(new Date());
-    // Turn "p.m." / "a.m." into "PM" / "AM"
     formatted = formatted.replace(" a.m.", " AM").replace(" p.m.", " PM");
 
     torontoTimeEl.textContent = formatted;
@@ -142,9 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const temp = Math.round(data.main.temp);
       const desc = data.weather[0].description;
-      const icon = data.weather[0].icon; // e.g. "01d"
+      const icon = data.weather[0].icon;
 
-      // Build a richer layout with icon + temp + description
       torontoWeatherEl.innerHTML = `
         <span class="toronto-weather-temp">${temp}°C</span>
         <span class="toronto-weather-icon">
@@ -160,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (torontoWeatherEl) {
     loadTorontoWeather();
-    setInterval(loadTorontoWeather, 10 * 60 * 1000); // update every 10 min
+    setInterval(loadTorontoWeather, 10 * 60 * 1000);
   }
 
   /* -------- Precious Metals (Gold/Silver) in CAD -------- */
@@ -194,8 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const goldCad = goldUsd * usdToCad;
       const silverCad = silverUsd * usdToCad;
 
-      metalsInlineEl.textContent =
-        `Gold C$${goldCad.toFixed(0)}/oz • Silver C$${silverCad.toFixed(2)}/oz`;
+      // ✅ Pills output (matches your updated CSS)
+      metalsInlineEl.innerHTML = `
+        <span class="metals-pill"><strong>Gold</strong> C$${goldCad.toFixed(0)}/oz</span>
+        <span class="metals-pill"><strong>Silver</strong> C$${silverCad.toFixed(2)}/oz</span>
+      `;
     } catch (err) {
       console.error("Metals error:", err);
       metalsInlineEl.textContent = "N/A";
@@ -204,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (metalsInlineEl) {
     loadMetalsCAD();
-    setInterval(loadMetalsCAD, 5 * 60 * 1000); // refresh every 5 minutes
+    setInterval(loadMetalsCAD, 5 * 60 * 1000);
   }
 
 });
