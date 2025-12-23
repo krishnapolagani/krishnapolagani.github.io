@@ -24,6 +24,31 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     revealEls.forEach(el => el.classList.add('reveal-visible'));
   }
+  (function initFeaturedCarousel() {
+  const carousel = document.getElementById("featuredProjects");
+  if (!carousel) return;
+
+  const wrap = carousel.closest(".carousel-wrap");
+  if (!wrap) return;
+
+  const prev = wrap.querySelector(".carousel-btn.prev");
+  const next = wrap.querySelector(".carousel-btn.next");
+
+  const scrollByAmount = () => Math.min(380, carousel.clientWidth * 0.9);
+
+  if (prev) {
+    prev.addEventListener("click", () => {
+      carousel.scrollBy({ left: -scrollByAmount(), behavior: "smooth" });
+    });
+  }
+
+  if (next) {
+    next.addEventListener("click", () => {
+      carousel.scrollBy({ left: scrollByAmount(), behavior: "smooth" });
+    });
+  }
+})();
+
 
   /* -------- Theme toggle (dark / light) -------- */
   const body = document.body;
@@ -72,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* -------- Back to top + Parallax -------- */
   const backToTopBtn = document.getElementById('backToTop');
+  const topBarWrap = document.getElementById("topBarWrap");
 
   function handleScroll() {
     if (backToTopBtn) {
@@ -84,6 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', handleScroll);
   handleScroll();
+  if (topBarWrap) {
+  topBarWrap.classList.toggle("is-scrolled", window.scrollY > 10);
+}
 
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
