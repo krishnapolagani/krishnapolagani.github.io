@@ -17,9 +17,9 @@
 
   <!--
     Favicon note:
-    Your repo screenshot does NOT show a favicon file (like assets/images/favicon-rk-logo.png).
-    To avoid 404s, this temporarily points to an image that *does* exist in your repo.
-    Replace it later with your real favicon file path.
+    Your repo screenshot did not show a dedicated favicon file.
+    This uses your existing profile JPG as a fallback to avoid 404s.
+    If you add a favicon later, update these two lines to that file.
   -->
   <link rel="icon" type="image/jpeg" href="assets/images/Profile/IMG-8092.JPG">
   <link rel="apple-touch-icon" href="assets/images/Profile/IMG-8092.JPG">
@@ -81,12 +81,17 @@
         <a href="blogs.html">Blogs</a>
       </nav>
 
-      <!-- Toronto time + weather -->
+      <!-- Toronto time + weather + Metals (inline like weather) -->
       <div class="toronto-meta">
         <span class="toronto-label">Toronto •</span>
         <span id="toronto-time"></span>
+
         <span class="toronto-separator">|</span>
         <span id="toronto-weather"></span>
+
+        <span class="toronto-separator">|</span>
+        <span class="metals-label">Metals</span>
+        <span id="metals-inline" class="metals-inline">Loading…</span>
       </div>
     </div>
 
@@ -130,8 +135,8 @@
             <span class="tag">Business process transformation</span>
           </div>
 
-          <!-- CTAs (uses updated CSS button styles) -->
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+          <!-- CTA buttons -->
+          <div class="hero-cta">
             <a class="btn btn--primary" href="#projects">View selected projects</a>
             <a class="btn btn--ghost" href="#contact">Contact</a>
           </div>
