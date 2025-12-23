@@ -610,6 +610,97 @@ section:nth-of-type(odd)  { --card-bg: #ffffff; }
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: 20px;
 }
+/* ---------- Experience Timeline (NEW, non-breaking) ---------- */
+.timeline {
+  --tl-x: 132px;                 /* where the vertical line sits */
+  position: relative;
+  padding: 2px 0;
+}
+
+/* vertical line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: var(--tl-x);
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: rgba(27, 60, 146, 0.22);
+  border-radius: 999px;
+}
+
+/* each timeline row */
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px 1fr; /* date | content */
+  gap: 28px;
+  padding: 10px 0 16px;
+}
+
+/* dot on the line */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: var(--tl-x);
+  top: 18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 2px solid rgba(27, 60, 146, 0.65);
+  box-shadow: 0 10px 18px rgba(9, 12, 38, 0.18);
+  transform: translateX(-50%);
+}
+
+.timeline-date {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  padding-top: 2px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.timeline-content ul {
+  margin: 10px 0 0;
+}
+
+/* Dark mode tune (keeps your theme intact) */
+body.dark-mode .timeline::before {
+  background: rgba(226, 232, 240, 0.16);
+}
+
+body.dark-mode .timeline-item::before {
+  background: #020617;
+  border-color: rgba(226, 232, 240, 0.55);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
+}
+
+body.dark-mode .timeline-date {
+  color: #94a3b8;
+}
+
+/* Mobile: single-column timeline */
+@media (max-width: 720px) {
+  .timeline { --tl-x: 10px; }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-left: 22px;          /* room for dot/line */
+  }
+
+  .timeline-date {
+    text-align: left;
+    padding-top: 0;
+  }
+
+  .timeline-item::before {
+    top: 16px;
+  }
+}
+
 
 .item { margin-bottom: 12px; }
 
