@@ -214,6 +214,12 @@ nav a.active {
 .toronto-separator { opacity: 0.7; }
 .toronto-weather-temp { font-weight: 500; }
 
+/* ✅ FIX: better baseline alignment (weather icon + text) */
+.toronto-weather-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
 .toronto-weather-icon img {
   width: 16px;
   height: 16px;
@@ -237,7 +243,7 @@ nav a.active {
   gap: 6px;                      /* ✅ spacing between pills */
 }
 
-/* ✅ NEW: Metals pills (used by your JS output) */
+/* ✅ Metals pills (used by your JS output) */
 .metals-pill {
   display: inline-flex;
   align-items: center;
@@ -254,7 +260,7 @@ nav a.active {
 
 body.dark-mode .toronto-meta { color: #e2e8f0; }
 
-/* ---------- Buttons (NEW) ---------- */
+/* ---------- Buttons ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -279,18 +285,20 @@ body.dark-mode .toronto-meta { color: #e2e8f0; }
 
 .btn--primary:hover { transform: translateY(-1px); }
 
+/* ✅ FIX: make Contact button match “View selected projects” (both light) */
 .btn--ghost {
-  background: rgba(255, 255, 255, 0.14);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--primary-dark);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
 }
 
 .btn--ghost:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #ffffff;
   transform: translateY(-1px);
 }
 
-/* Hero CTA wrapper (NEW) */
+/* Hero CTA wrapper */
 .hero-cta {
   display: flex;
   gap: 10px;
@@ -333,12 +341,8 @@ body.dark-mode .toronto-meta { color: #e2e8f0; }
   max-width: 650px;
 }
 
-/* ✅ FIX: keep copy readable but DON’T constrain grid containers */
-.hero-main-text,
-.card p,
-.card ul {
-  max-width: var(--prose);
-}
+/* keep hero copy readable (only hero) */
+.hero-main-text { max-width: var(--prose); }
 
 .tag-list {
   display: flex;
@@ -395,16 +399,23 @@ body.dark-mode .toronto-meta { color: #e2e8f0; }
   display: block;
 }
 
-/* Hero profile card on the right */
+/* ✅ FIX: "What I focus on" — more “on-brand” + still distinct in dark mode */
 .hero-card {
   max-width: 340px;
   margin-left: auto;
-  background: rgba(5, 10, 30, 0.9);
   border-radius: 24px;
   padding: 20px 20px 22px;
   border: 1px solid rgba(148, 163, 184, 0.75);
   box-shadow: 0 20px 45px rgba(4, 7, 20, 0.82);
   animation: hero-float 10s ease-in-out infinite;
+
+  /* glassy but still dark (matches header) */
+  background: radial-gradient(circle at top left,
+    rgba(248, 250, 252, 0.10),
+    rgba(5, 10, 30, 0.92)
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .hero-card-body { margin-top: 8px; }
@@ -529,6 +540,12 @@ section:nth-of-type(odd)  { --card-bg: #ffffff; }
   color: var(--text-muted);
 }
 
+/* ✅ FIX: remove “empty right space” on desktop (no prose constraint inside cards) */
+.card p,
+.card ul {
+  max-width: none;
+}
+
 .two-col {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
@@ -615,7 +632,7 @@ section:nth-of-type(odd)  { --card-bg: #ffffff; }
   background: radial-gradient(circle at top left, rgba(27, 60, 146, 0.08), #ffffff);
 }
 
-/* Gallery (UPDATED: consistent 3/2/1 grid + aspect ratio images) */
+/* Gallery */
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -818,13 +835,14 @@ body.dark-mode .hero-profile-wrapper {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
 }
 
+/* ✅ Dark mode: make “What I focus on” feel different vs light mode */
 body.dark-mode .hero-card {
   background: radial-gradient(circle at top left,
-    rgba(15, 23, 42, 0.95),
-    rgba(15, 23, 42, 1)
+    rgba(59, 130, 246, 0.10),
+    rgba(2, 6, 23, 0.96)
   );
-  border-color: #1e293b;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9);
+  border-color: rgba(148, 163, 184, 0.35);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.92);
 }
 
 body.dark-mode .sports-hero,
@@ -890,7 +908,7 @@ body.dark-mode footer {
     text-align: right;
   }
 
-  /* ✅ make pills slightly smaller on mobile */
+  /* ✅ make metals pills slightly smaller on mobile */
   .metals-pill {
     font-size: 10.5px;
     padding: 2px 7px;
@@ -919,11 +937,4 @@ body.dark-mode footer {
   .hero h1 { font-size: 32px; }
 
   .hero-profile-wrapper { margin-top: 20px; }
-
-  /* ✅ FIX: remove big “right side empty space” on mobile */
-  .card p,
-  .card ul,
-  .hero-main-text {
-    max-width: 100%;
-  }
 }
