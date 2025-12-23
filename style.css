@@ -227,7 +227,16 @@ nav a.active {
   border-radius: 999px;
 }
 
+/* Keep METALS + its pills together as one unit (prevents METALS on one line and pills on next) */
+.metals-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap; /* key: breaks as a whole group */
+}
+
 /* ---------- Metals inline (kept) ---------- */
+
 .metals-label {
   letter-spacing: 0.06em;
   text-transform: uppercase;
