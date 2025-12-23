@@ -90,10 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-    /* -------- Toronto Weather (OpenWeatherMap) -------- */
-
-  // Your API key
+  /* -------- Toronto Weather (OpenWeatherMap) -------- */
   const OPENWEATHER_API_KEY = "2ab143c2b961e5d504d3ee9a46173d58";
 
   const torontoTimeEl = document.getElementById("toronto-time");
@@ -113,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const formatter = new Intl.DateTimeFormat([], options);
     let formatted = formatter.format(new Date());
-    // Turn "p.m." / "a.m." into "PM" / "AM"
     formatted = formatted.replace(" a.m.", " AM").replace(" p.m.", " PM");
 
     torontoTimeEl.textContent = formatted;
@@ -143,9 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const temp = Math.round(data.main.temp);
       const desc = data.weather[0].description;
-      const icon = data.weather[0].icon; // e.g. "01d"
+      const icon = data.weather[0].icon;
 
-      // Build a richer layout with icon + temp + description
       torontoWeatherEl.innerHTML = `
         <span class="toronto-weather-temp">${temp}°C</span>
         <span class="toronto-weather-icon">
@@ -161,8 +156,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (torontoWeatherEl) {
     loadTorontoWeather();
-    setInterval(loadTorontoWeather, 10 * 60 * 1000); // update every 10 min
+    setInterval(loadTorontoWeather, 10 * 60 * 1000);
   }
 
+  /* -------- Metals (Gold + Silver in CAD) -------- */
+  const metalsInlineEl = document.getElementById("metals-inline");
+
+  async function loadMetalsCAD() {
+    if (!metalsInlineEl) return;
+
+    try {
+      // Gold/Silver prices are returned in USD; convert to CAD using USD->CAD FX
+      const [goldRes, silverRes, fxRes] = await Promise.all([
+        fetch("https://api.gold-api.com/price/XAU"),
+        fetch("https://api.gold-api.com/price/XAG"),
+        fetch("https://api.exchangerate.host/latest?base=USD&symbols=CAD")
+      ]);
+
+      const [gold, silver, fx] = await Promise.all([
+        goldRes.json(),
+        silverRes.json(),
+        fxRes.json()
+      ]);
+
+      const rate = fx && fx.rates && fx.rates.CAD ? fx.rates.CAD : null;
+      if (!goldRes.ok || !silverRes.ok || !fxRes.ok || !rate || !gold.price || !silver.price) {
+        metalsInlineEl.textContent = "N/A";
+        return;
+      }
+
+      const goldCad = gold.price * rate;
+      const silverCad = silver.price * rate;
+
+      const fmt0 = new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
+      const fmt2 = new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      metalsInlineEl.innerHTML = `
+        <span class="metals-item"><strong>Au</strong> ${fmt0.format(goldCad)}/oz</span>
+        <span class="metals-dot">·</span>
+        <span class="metals-item"><strong>Ag</strong> ${fmt2.format(silverCad)}/oz</span>
+      `;
+    } catch (e) {
+      console.error("Metals error", e);
+      metalsInlineEl.textContent = "N/A";
+    }
+  }
+
+  if (metalsInlineEl) {
+    loadMetalsCAD();
+    setInterval(loadMetalsCAD, 10 * 60 * 1000); // refresh every 10 minutes
+  }
 
 });
