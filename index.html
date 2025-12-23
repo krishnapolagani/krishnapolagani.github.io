@@ -15,9 +15,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Ramakrishna (RK) Polagani - PLM Techno-functional Architect and Business Systems Analyst specializing in Teamcenter, Oracle Agile PLM, and end-to-end PLM-ERP-MES integrations." />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/favicon-rk-logo.png" id="favicon">
-  <link rel="apple-touch-icon" href="images/favicon-rk-logo.png">
+  <!--
+    Favicon note:
+    Your repo screenshot does NOT show a favicon file (like assets/images/favicon-rk-logo.png).
+    To avoid 404s, this temporarily points to an image that *does* exist in your repo.
+    Replace it later with your real favicon file path.
+  -->
+  <link rel="icon" type="image/jpeg" href="assets/images/Profile/IMG-8092.JPG">
+  <link rel="apple-touch-icon" href="assets/images/Profile/IMG-8092.JPG">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://rkpolagani.com/" />
@@ -27,15 +32,13 @@
   <meta property="og:title" content="Ramakrishna Polagani | PLM Techno-functional Architect and Business Systems Analyst" />
   <meta property="og:description" content="PLM Techno-functional Architect and Business Systems Analyst with experience in Teamcenter, Oracle Agile PLM, Windchill, MechWorks PDM, Syspro ERP, and complex PLM-ERP-ALM integrations." />
   <meta property="og:url" content="https://rkpolagani.com/" />
-  <meta property="og:image" content="https://rkpolagani.com/images/favicon-rk-logo.png" />
-  <meta property="og:image:width" content="800" />
-  <meta property="og:image:height" content="800" />
+  <meta property="og:image" content="https://rkpolagani.com/assets/images/Profile/IMG-8092.JPG" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Ramakrishna Polagani | PLM Techno-functional Architect and Business Systems Analyst" />
   <meta name="twitter:description" content="Helping engineering, manufacturing and IT teams build a unified digital thread across PLM, ERP, MES, ALM and QMS." />
-  <meta name="twitter:image" content="https://rkpolagani.com/images/favicon-rk-logo.png" />
+  <meta name="twitter:image" content="https://rkpolagani.com/assets/images/Profile/IMG-8092.JPG" />
 
   <!-- Structured data (Person) -->
   <script type="application/ld+json">
@@ -55,6 +58,7 @@
 
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
@@ -64,6 +68,7 @@
         <span class="brand-mark">RK</span>
         POLAGANI
       </a>
+
       <nav>
         <a href="index.html" class="active">Home</a>
         <a href="#about">About</a>
@@ -75,31 +80,33 @@
         <a href="sports.html">Sports</a>
         <a href="blogs.html">Blogs</a>
       </nav>
-      
-     <!-- New: Toronto time + weather -->
+
+      <!-- Toronto time + weather -->
       <div class="toronto-meta">
-         <span class="toronto-label">Toronto •</span>
-         <span id="toronto-time"></span>
-         <span class="toronto-separator">|</span>
-         <span id="toronto-weather"></span>
-      </div> 
+        <span class="toronto-label">Toronto •</span>
+        <span id="toronto-time"></span>
+        <span class="toronto-separator">|</span>
+        <span id="toronto-weather"></span>
+      </div>
     </div>
 
-       <!-- Hero: two-column layout -->
+    <!-- Hero: two-column layout -->
     <div class="hero">
       <div class="hero-grid reveal" data-delay="1">
-        <!-- Left: name, photo, description -->
+
+        <!-- Left -->
         <div>
           <h1>Ramakrishna Polagani (RK)</h1>
           <h2>PLM Techno-functional Architect and Business Systems Analyst</h2>
 
-          <!-- Photo moved here so on mobile it appears right after name + role -->
-          <div class="hero-profile-wrapper" style="margin-bottom:16px;">
+          <!-- Profile photo -->
+          <div class="hero-profile-wrapper">
             <img
               src="assets/images/Profile/IMG-8092.JPG"
               alt="Ramakrishna Polagani"
               class="hero-profile-img"
               loading="lazy"
+              decoding="async"
             >
           </div>
 
@@ -109,6 +116,7 @@
             a reliable digital thread across PLM, ERP, ALM, MES and QMS so decisions are based
             on clean, consistent and traceable information.
           </p>
+
           <p>
             This site is also a personal sandbox where I experiment with clean layouts using
             simple HTML, CSS and a bit of JavaScript.
@@ -122,23 +130,28 @@
             <span class="tag">Business process transformation</span>
           </div>
 
-          <a href="#projects" class="pill" style="margin-top:8px;display:inline-block;">
-            View selected projects
-          </a>
+          <!-- CTAs (uses updated CSS button styles) -->
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+            <a class="btn btn--primary" href="#projects">View selected projects</a>
+            <a class="btn btn--ghost" href="#contact">Contact</a>
+          </div>
         </div>
 
         <!-- Right: focus card -->
         <div>
           <div class="hero-card">
-            <h3>What I focus on</h3>
-            <ul>
-              <li>Delivering end-to-end PLM implementations, from discovery and architecture through go-live and support.</li>
-              <li>Designing integrations that keep parts, BOMs and changes aligned across PLM, ERP, ALM, MES and QMS.</li>
-              <li>Strengthening change and configuration management for regulated and complex product environments.</li>
-              <li>Balancing business needs, technical constraints and long-term maintainability in solution design.</li>
-            </ul>
+            <h3 class="hero-card-title">What I focus on</h3>
+            <div class="hero-card-body">
+              <ul>
+                <li>Delivering end-to-end PLM implementations, from discovery and architecture through go-live and support.</li>
+                <li>Designing integrations that keep parts, BOMs and changes aligned across PLM, ERP, ALM, MES and QMS.</li>
+                <li>Strengthening change and configuration management for regulated and complex product environments.</li>
+                <li>Balancing business needs, technical constraints and long-term maintainability in solution design.</li>
+              </ul>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -177,6 +190,7 @@
       <div class="card">
         <h2>Experience</h2>
         <p class="card-subtitle">Where I have worked and the themes across those roles.</p>
+
         <div class="two-col">
           <div>
             <div class="item">
@@ -229,6 +243,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -237,6 +252,7 @@
       <div class="card">
         <h2>Skills and tools</h2>
         <p class="card-subtitle">Platforms, domains and ways of working.</p>
+
         <div class="two-col">
           <div>
             <h3 style="margin-top:0;font-size:14px;">PLM, PDM and ALM</h3>
@@ -254,6 +270,7 @@
               <li>Project and portfolio tools: Kantata, Smartsheets, Celoxis, Azure DevOps.</li>
             </ul>
           </div>
+
           <div>
             <h3 style="margin-top:0;font-size:14px;">Integration, automation and delivery</h3>
             <ul>
@@ -342,21 +359,25 @@
       <div class="card">
         <h2>Contact</h2>
         <p class="card-subtitle">Best ways to reach me.</p>
+
         <div class="contact-row">
           <span>Email:
             <a href="mailto:ramakrishnap13@gmail.com">ramakrishnap13@gmail.com</a>
           </span>
+
           <span>LinkedIn:
             <a href="https://www.linkedin.com/in/ramakrishna-polagani-67297ab8/" target="_blank" rel="noopener">
               linkedin.com/in/ramakrishna-polagani-67297ab8
             </a>
           </span>
+
           <span>Resume:
             <a href="assets/Ramakrishna-Polagani-Resume.pdf" target="_blank" rel="noopener">
               PDF download
             </a>
           </span>
         </div>
+
         <p style="margin-top:12px;font-size:13px;color:var(--text-muted);">
           I am open to conversations about PLM, enterprise integrations and ways to improve how organizations design,
           build and manage products using a connected digital thread.
@@ -373,7 +394,7 @@
   </div>
 </footer>
 
-<!-- Back to top button (optional but recommended on all pages) -->
+<!-- Back to top button -->
 <button class="back-to-top-btn" id="backToTop" aria-label="Back to top">↑</button>
 
 <!-- Theme toggle button -->
@@ -383,5 +404,3 @@
 <script src="main.js"></script>
 </body>
 </html>
-
-
