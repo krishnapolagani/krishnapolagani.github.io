@@ -91,6 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -------- Toronto Weather (OpenWeatherMap) -------- */
+
+  // Your API key
   const OPENWEATHER_API_KEY = "2ab143c2b961e5d504d3ee9a46173d58";
 
   const torontoTimeEl = document.getElementById("toronto-time");
@@ -110,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const formatter = new Intl.DateTimeFormat([], options);
     let formatted = formatter.format(new Date());
+    // Turn "p.m." / "a.m." into "PM" / "AM"
     formatted = formatted.replace(" a.m.", " AM").replace(" p.m.", " PM");
 
     torontoTimeEl.textContent = formatted;
@@ -139,8 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const temp = Math.round(data.main.temp);
       const desc = data.weather[0].description;
-      const icon = data.weather[0].icon;
+      const icon = data.weather[0].icon; // e.g. "01d"
 
+      // Build a richer layout with icon + temp + description
       torontoWeatherEl.innerHTML = `
         <span class="toronto-weather-temp">${temp}°C</span>
         <span class="toronto-weather-icon">
@@ -156,23 +160,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (torontoWeatherEl) {
     loadTorontoWeather();
-    setInterval(loadTorontoWeather, 10 * 60 * 1000);
+    setInterval(loadTorontoWeather, 10 * 60 * 1000); // update every 10 min
   }
 
-    /* -------- Precious Metals (Gold/Silver) in CAD -------- */
+  /* -------- Precious Metals (Gold/Silver) in CAD -------- */
   const metalsInlineEl = document.getElementById("metals-inline");
 
   async function loadMetalsCAD() {
     if (!metalsInlineEl) return;
 
-    // show something immediately
-    metalsInlineEl.textContent = "Loading...";
-
     try {
       const [goldRes, silverRes, fxRes] = await Promise.all([
         fetch("https://api.gold-api.com/price/XAU"),
         fetch("https://api.gold-api.com/price/XAG"),
-        fetch("https://api.exchangerate.host/latest?base=USD&symbols=CAD")
+        fetch("https://open.er-api.com/v6/latest/USD") // USD -> CAD (no key)
       ]);
 
       const [goldData, silverData, fxData] = await Promise.all([
@@ -186,7 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const silverUsd = silverData?.price;
 
       if (!usdToCad || !goldUsd || !silverUsd) {
-        throw new Error("Unexpected API response");
+        console.log("Metals debug:", { goldData, silverData, fxData });
+        throw new Error("Unexpected API response for metals/FX");
       }
 
       const goldCad = goldUsd * usdToCad;
@@ -202,8 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (metalsInlineEl) {
     loadMetalsCAD();
-    setInterval(loadMetalsCAD, 5 * 60 * 1000); // refresh every 5 mins
+    setInterval(loadMetalsCAD, 5 * 60 * 1000); // refresh every 5 minutes
   }
-
 
 });
