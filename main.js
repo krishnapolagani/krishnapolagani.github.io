@@ -143,13 +143,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const desc = data.weather[0].description;
       const icon = data.weather[0].icon;
 
-      torontoWeatherEl.innerHTML = `
-        <span class="toronto-weather-temp">${temp}°C</span>
-        <span class="toronto-weather-icon">
-          <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}">
-        </span>
-        <span class="toronto-weather-desc">${desc}</span>
-      `;
+     torontoWeatherEl.innerHTML = `
+  <span class="weather-pill">
+    <span class="toronto-weather-temp">${temp}°C</span>
+    <span class="toronto-weather-icon">
+      <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}">
+    </span>
+    <span class="toronto-weather-desc">${desc}</span>
+  </span>
+`;
+
     } catch (err) {
       console.error("Weather error", err);
       torontoWeatherEl.textContent = "Weather N/A";
