@@ -62,45 +62,46 @@
 <body>
 
 <header>
-  <div class="container">
-    <div class="top-bar">
-      <a href="index.html" class="brand">
-        <span class="brand-mark">RK</span>
-        POLAGANI
-      </a>
+  <!-- Sticky glass header wrapper -->
+  <div class="top-bar-wrap" id="topBarWrap">
+    <div class="container">
+      <div class="top-bar">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">RK</span>
+          POLAGANI
+        </a>
 
-      <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-        <a href="travel.html">Travelling</a>
-        <a href="sports.html">Sports</a>
-        <a href="blogs.html">Blogs</a>
-      </nav>
+        <nav>
+          <a href="index.html" class="active">Home</a>
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+          <a href="travel.html">Travelling</a>
+          <a href="sports.html">Sports</a>
+          <a href="blogs.html">Blogs</a>
+        </nav>
 
-      <!-- Toronto time + weather + Metals -->
-      <div class="toronto-meta" id="torontoMeta">
-        <span class="toronto-label">Toronto</span>
-        <span class="toronto-dot">•</span>
+        <!-- Toronto time + weather + Metals -->
+        <div class="toronto-meta" id="torontoMeta">
+          <span class="toronto-label">Toronto</span>
+          <span class="toronto-dot">•</span>
 
-        <!-- Time (always visible) -->
-        <span id="toronto-time" class="time-pill segment" data-seg="time"></span>
+          <span id="toronto-time" class="time-pill segment" data-seg="time"></span>
+          <span id="toronto-weather" class="segment" data-seg="weather" hidden></span>
 
-        <!-- Weather (hidden until JS populates) -->
-        <span id="toronto-weather" class="segment" data-seg="weather" hidden></span>
-
-        <!-- Metals (always present; content updated by JS) -->
-        <span class="metals-group segment" data-seg="metals">
-          <span class="metals-label">Metals</span>
-          <span id="metals-inline" class="metals-inline" aria-live="polite">Loading…</span>
-        </span>
+          <span class="metals-group segment" data-seg="metals">
+            <span class="metals-label">Metals</span>
+            <span id="metals-inline" class="metals-inline" aria-live="polite">Loading…</span>
+          </span>
+        </div>
       </div>
-    </div> <!-- ✅ CLOSE top-bar -->
+    </div>
+  </div>
 
-
+  <!-- Hero container stays normal -->
+  <div class="container">
 
 
     <!-- Hero: two-column layout -->
@@ -142,6 +143,51 @@
             <span class="tag">Business analysis and architecture</span>
             <span class="tag">Business process transformation</span>
           </div>
+          <!-- Apple-style value props -->
+<div class="value-props" aria-label="Key strengths">
+  <div class="value-prop">
+    <div class="value-prop-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M7 7h10v10H7V7Z" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M4 10V6a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M20 14v4a2 2 0 0 1-2 2h-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="value-prop-title">Digital Thread</div>
+      <div class="value-prop-text">Connect PLM–ERP–ALM–MES with clean, traceable product data.</div>
+    </div>
+  </div>
+
+  <div class="value-prop">
+    <div class="value-prop-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M8 12h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M12 8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M5.5 5.5h13v13h-13v-13Z" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+    </div>
+    <div>
+      <div class="value-prop-title">Change & Config</div>
+      <div class="value-prop-text">Stronger governance for BOMs, revisions, and controlled release flows.</div>
+    </div>
+  </div>
+
+  <div class="value-prop">
+    <div class="value-prop-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M7 15c1.2 1.2 2.8 2 5 2 3.9 0 7-2.7 7-6s-3.1-6-7-6c-2.2 0-3.8.7-5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M5 12h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M5 9v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="value-prop-title">Architecture & Delivery</div>
+      <div class="value-prop-text">Workshops → requirements → test/UAT → go-live with supportable solutions.</div>
+    </div>
+  </div>
+</div>
+
 
           <!-- CTA buttons -->
           <div class="hero-cta">
@@ -169,6 +215,7 @@
     </div>
 
   </div>
+</div>
 </header>
 
 <main>
