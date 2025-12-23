@@ -2,53 +2,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* -------- Footer year -------- */
   const yearEl = document.getElementById('year');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* -------- Reveal-on-scroll -------- */
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && revealEls.length) {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
     revealEls.forEach(el => observer.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('reveal-visible'));
   }
+
+  /* -------- Featured Projects carousel -------- */
   (function initFeaturedCarousel() {
-  const carousel = document.getElementById("featuredProjects");
-  if (!carousel) return;
+    const carousel = document.getElementById("featuredProjects");
+    if (!carousel) return;
 
-  const wrap = carousel.closest(".carousel-wrap");
-  if (!wrap) return;
+    const wrap = carousel.closest(".carousel-wrap");
+    if (!wrap) return;
 
-  const prev = wrap.querySelector(".carousel-btn.prev");
-  const next = wrap.querySelector(".carousel-btn.next");
+    const prev = wrap.querySelector(".carousel-btn.prev");
+    const next = wrap.querySelector(".carousel-btn.next");
 
-  const scrollByAmount = () => Math.min(380, carousel.clientWidth * 0.9);
+    const scrollByAmount = () => Math.min(380, carousel.clientWidth * 0.9);
 
-  if (prev) {
-    prev.addEventListener("click", () => {
+    prev?.addEventListener("click", () => {
       carousel.scrollBy({ left: -scrollByAmount(), behavior: "smooth" });
     });
-  }
 
-  if (next) {
-    next.addEventListener("click", () => {
+    next?.addEventListener("click", () => {
       carousel.scrollBy({ left: scrollByAmount(), behavior: "smooth" });
     });
-  }
-})();
-
+  })();
 
   /* -------- Theme toggle (dark / light) -------- */
   const body = document.body;
@@ -57,8 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const LIGHT_ICON = '☾';
   const DARK_ICON  = '☀️';
-  const LIGHT_FAVICON = 'images/favicon-rk-logo.png';
-  const DARK_FAVICON  = 'images/favicon-rk-logo-dark.png';
+
+  // ✅ FIX: match your actual favicon path (avoid 404)
+  const LIGHT_FAVICON = 'assets/images/Profile/IMG-8092.JPG';
+  const DARK_FAVICON  = 'assets/images/Profile/IMG-8092.JPG';
+
   const THEME_KEY = 'rk-theme';
 
   function applyTheme(isDark, persist = true) {
@@ -86,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      // NOTE: keeping your behavior (default dark) exactly as-is:
+      // keep your behavior (default dark)
       applyTheme(prefersDark || true, false);
     })();
 
@@ -95,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* -------- Back to top + Parallax -------- */
+  /* -------- Back to top + Parallax + Sticky glass -------- */
   const backToTopBtn = document.getElementById('backToTop');
   const topBarWrap = document.getElementById("topBarWrap");
 
@@ -106,27 +102,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const offset = window.scrollY * 0.18;
     document.documentElement.style.setProperty('--hero-parallax', `${-offset}px`);
-      if (topBarWrap) {
-  topBarWrap.classList.toggle("is-scrolled", window.scrollY > 10);
-}
+
+    // ✅ FIX: keep sticky glass behavior inside scroll handler
+    if (topBarWrap) {
+      topBarWrap.classList.toggle("is-scrolled", window.scrollY > 10);
+    }
   }
 
   window.addEventListener('scroll', handleScroll);
   handleScroll();
 
+  backToTopBtn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  /* =========================================================
-     TOP BAR SEGMENT SYNC (prevents | | and hides empty blocks)
-     Requires updated HTML:
-       - #torontoMeta container
-       - .segment elements with data-seg="time|weather|metals"
-     ========================================================= */
+  /* -------- Header segments (hide empty + prevent ||) -------- */
   function syncTorontoMetaSegments() {
     const meta = document.getElementById("torontoMeta");
     if (!meta) return;
@@ -135,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
     segments.forEach((seg) => {
       const key = seg.dataset.seg;
 
-      // time should always show
       if (key === "time") {
         seg.hidden = false;
         return;
@@ -143,26 +132,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const hasImg = !!seg.querySelector("img");
       const hasText = (seg.textContent || "").trim().length > 0;
-
-      // hide if empty (prevents separators from appearing)
       seg.hidden = !(hasImg || hasText);
     });
   }
 
-  /* -------- Toronto Weather (OpenWeatherMap) -------- */
+  // ✅ FIX: run once immediately
+  syncTorontoMetaSegments();
 
-  // Your API key
+  /* -------- Toronto Weather (OpenWeatherMap) -------- */
   const OPENWEATHER_API_KEY = "2ab143c2b961e5d504d3ee9a46173d58";
 
   const torontoTimeEl = document.getElementById("toronto-time");
   const torontoWeatherEl = document.getElementById("toronto-weather");
 
-  // small helper: fetch JSON and fail fast on non-200
   async function fetchJsonOrThrow(url) {
     const res = await fetch(url, { cache: "no-store" });
-    const data = await res.json().catch(() => null);
+    let data = null;
+    try { data = await res.json(); } catch (_) {}
+
     if (!res.ok) {
-      const msg = (data && (data.message || data.error)) ? `: ${data.message || data.error}` : "";
+      const msg = data?.message ? `: ${data.message}` : "";
       throw new Error(`HTTP ${res.status}${msg}`);
     }
     return data;
@@ -172,21 +161,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateTorontoTime() {
     if (!torontoTimeEl) return;
 
-    const options = {
+    const formatter = new Intl.DateTimeFormat([], {
       timeZone: "America/Toronto",
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
       hour12: true
-    };
+    });
 
-    const formatter = new Intl.DateTimeFormat([], options);
     let formatted = formatter.format(new Date());
     formatted = formatted.replace(" a.m.", " AM").replace(" p.m.", " PM");
 
     torontoTimeEl.textContent = formatted;
-
-    // keep separators correct as time updates
     syncTorontoMetaSegments();
   }
 
@@ -199,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadTorontoWeather() {
     if (!torontoWeatherEl) return;
 
-    // Start: keep it hidden until we have content
     torontoWeatherEl.innerHTML = "";
     torontoWeatherEl.hidden = true;
     syncTorontoMetaSegments();
@@ -208,10 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const data = await fetchJsonOrThrow(url);
-
-      if (!data || !data.main || !data.weather || !data.weather.length) {
-        throw new Error("Unexpected weather payload");
-      }
+      if (!data?.main || !data?.weather?.length) throw new Error("Unexpected weather payload");
 
       const temp = Math.round(data.main.temp);
       const desc = data.weather[0].description;
@@ -229,11 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       torontoWeatherEl.hidden = false;
       syncTorontoMetaSegments();
-
     } catch (err) {
       console.error("Weather error", err);
-
-      // Keep it hidden if unavailable (cleaner than "Weather N/A" in header)
       torontoWeatherEl.innerHTML = "";
       torontoWeatherEl.hidden = true;
       syncTorontoMetaSegments();
@@ -251,40 +230,32 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadMetalsCAD() {
     if (!metalsInlineEl) return;
 
-    // Keep your existing "Loading…" behavior but ensure it always resolves
     metalsInlineEl.textContent = "Loading…";
 
     try {
       const [goldData, silverData, fxData] = await Promise.all([
         fetchJsonOrThrow("https://api.gold-api.com/price/XAU"),
         fetchJsonOrThrow("https://api.gold-api.com/price/XAG"),
-        fetchJsonOrThrow("https://open.er-api.com/v6/latest/USD") // USD -> CAD (no key)
+        fetchJsonOrThrow("https://open.er-api.com/v6/latest/USD")
       ]);
 
       const usdToCad = fxData?.rates?.CAD;
       const goldUsd = goldData?.price;
       const silverUsd = silverData?.price;
 
-      if (!usdToCad || !goldUsd || !silverUsd) {
-        console.log("Metals debug:", { goldData, silverData, fxData });
-        throw new Error("Unexpected API response for metals/FX");
-      }
+      if (!usdToCad || !goldUsd || !silverUsd) throw new Error("Unexpected metals/FX payload");
 
       const goldCad = goldUsd * usdToCad;
       const silverCad = silverUsd * usdToCad;
 
-      // ✅ Pills output (matches your CSS)
       metalsInlineEl.innerHTML = `
         <span class="metals-pill"><strong>Gold</strong> C$${goldCad.toFixed(0)}/oz</span>
         <span class="metals-pill"><strong>Silver</strong> C$${silverCad.toFixed(2)}/oz</span>
       `;
 
       syncTorontoMetaSegments();
-
     } catch (err) {
-      console.error("Metals error:", err);
-
-      // Always resolve to a stable state (never stuck "Loading…")
+      console.error("Metals error", err);
       metalsInlineEl.textContent = "N/A";
       syncTorontoMetaSegments();
     }
