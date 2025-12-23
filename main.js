@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+      // NOTE: keeping your behavior (default dark) exactly as-is:
       applyTheme(prefersDark || true, false);
     })();
 
@@ -90,6 +91,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* =========================================================
+     TOP BAR SEGMENT SYNC (prevents | | and hides empty blocks)
+     Requires updated HTML:
+       - #torontoMeta container
+       - .segment elements with data-seg="time|weather|metals"
+     ========================================================= */
+  function syncTorontoMetaSegments() {
+    const meta = document.getElementById("torontoMeta");
+    if (!meta) return;
+
+    const segments = meta.querySelectorAll(".segment[data-seg]");
+    segments.forEach((seg) => {
+      const key = seg.dataset.seg;
+
+      // time should always show
+      if (key === "time") {
+        seg.hidden = false;
+        return;
+      }
+
+      const hasImg = !!seg.querySelector("img");
+      const hasText = (seg.textContent || "").trim().length > 0;
+
+      // hide if empty (prevents separators from appearing)
+      seg.hidden = !(hasImg || hasText);
+    });
+  }
+
   /* -------- Toronto Weather (OpenWeatherMap) -------- */
 
   // Your API key
@@ -97,6 +126,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const torontoTimeEl = document.getElementById("toronto-time");
   const torontoWeatherEl = document.getElementById("toronto-weather");
+
+  // small helper: fetch JSON and fail fast on non-200
+  async function fetchJsonOrThrow(url) {
+    const res = await fetch(url, { cache: "no-store" });
+    const data = await res.json().catch(() => null);
+    if (!res.ok) {
+      const msg = (data && (data.message || data.error)) ? `: ${data.message || data.error}` : "";
+      throw new Error(`HTTP ${res.status}${msg}`);
+    }
+    return data;
+  }
 
   /* ---- Toronto Time ---- */
   function updateTorontoTime() {
@@ -115,6 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
     formatted = formatted.replace(" a.m.", " AM").replace(" p.m.", " PM");
 
     torontoTimeEl.textContent = formatted;
+
+    // keep separators correct as time updates
+    syncTorontoMetaSegments();
   }
 
   if (torontoTimeEl) {
@@ -126,36 +169,44 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadTorontoWeather() {
     if (!torontoWeatherEl) return;
 
+    // Start: keep it hidden until we have content
+    torontoWeatherEl.innerHTML = "";
+    torontoWeatherEl.hidden = true;
+    syncTorontoMetaSegments();
+
     const url = `https://api.openweathermap.org/data/2.5/weather?id=6167865&units=metric&appid=${OPENWEATHER_API_KEY}`;
 
     try {
-      const res = await fetch(url);
-      const data = await res.json();
+      const data = await fetchJsonOrThrow(url);
 
-      console.log("Weather response:", res.status, data);
-
-      if (!res.ok || !data || !data.main || !data.weather || !data.weather.length) {
-        torontoWeatherEl.textContent = "Weather N/A";
-        return;
+      if (!data || !data.main || !data.weather || !data.weather.length) {
+        throw new Error("Unexpected weather payload");
       }
 
       const temp = Math.round(data.main.temp);
       const desc = data.weather[0].description;
       const icon = data.weather[0].icon;
 
-     torontoWeatherEl.innerHTML = `
-  <span class="weather-pill">
-    <span class="toronto-weather-temp">${temp}°C</span>
-    <span class="toronto-weather-icon">
-      <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}">
-    </span>
-    <span class="toronto-weather-desc">${desc}</span>
-  </span>
-`;
+      torontoWeatherEl.innerHTML = `
+        <span class="weather-pill">
+          <span class="toronto-weather-temp">${temp}°C</span>
+          <span class="toronto-weather-icon">
+            <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}">
+          </span>
+          <span class="toronto-weather-desc">${desc}</span>
+        </span>
+      `;
+
+      torontoWeatherEl.hidden = false;
+      syncTorontoMetaSegments();
 
     } catch (err) {
       console.error("Weather error", err);
-      torontoWeatherEl.textContent = "Weather N/A";
+
+      // Keep it hidden if unavailable (cleaner than "Weather N/A" in header)
+      torontoWeatherEl.innerHTML = "";
+      torontoWeatherEl.hidden = true;
+      syncTorontoMetaSegments();
     }
   }
 
@@ -170,17 +221,14 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadMetalsCAD() {
     if (!metalsInlineEl) return;
 
-    try {
-      const [goldRes, silverRes, fxRes] = await Promise.all([
-        fetch("https://api.gold-api.com/price/XAU"),
-        fetch("https://api.gold-api.com/price/XAG"),
-        fetch("https://open.er-api.com/v6/latest/USD") // USD -> CAD (no key)
-      ]);
+    // Keep your existing "Loading…" behavior but ensure it always resolves
+    metalsInlineEl.textContent = "Loading…";
 
+    try {
       const [goldData, silverData, fxData] = await Promise.all([
-        goldRes.json(),
-        silverRes.json(),
-        fxRes.json()
+        fetchJsonOrThrow("https://api.gold-api.com/price/XAU"),
+        fetchJsonOrThrow("https://api.gold-api.com/price/XAG"),
+        fetchJsonOrThrow("https://open.er-api.com/v6/latest/USD") // USD -> CAD (no key)
       ]);
 
       const usdToCad = fxData?.rates?.CAD;
@@ -195,14 +243,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const goldCad = goldUsd * usdToCad;
       const silverCad = silverUsd * usdToCad;
 
-      // ✅ Pills output (matches your updated CSS)
+      // ✅ Pills output (matches your CSS)
       metalsInlineEl.innerHTML = `
         <span class="metals-pill"><strong>Gold</strong> C$${goldCad.toFixed(0)}/oz</span>
         <span class="metals-pill"><strong>Silver</strong> C$${silverCad.toFixed(2)}/oz</span>
       `;
+
+      syncTorontoMetaSegments();
+
     } catch (err) {
       console.error("Metals error:", err);
+
+      // Always resolve to a stable state (never stuck "Loading…")
       metalsInlineEl.textContent = "N/A";
+      syncTorontoMetaSegments();
     }
   }
 
