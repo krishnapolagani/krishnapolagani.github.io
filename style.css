@@ -128,6 +128,7 @@ header::after {
   align-items: center;
   gap: 16px;
   flex-wrap: wrap; /* allow wrapping on narrower widths */
+  min-width: 0;    /* ✅ helps prevent flex overflow */
 }
 
 /* ---------- Brand / Logo ---------- */
@@ -202,6 +203,14 @@ nav a.active {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* ✅ used by updated HTML: "Toronto •" now split */
+.toronto-dot {
+  opacity: 0.8;
+  margin-right: 2px;
 }
 
 .toronto-label {
@@ -211,7 +220,9 @@ nav a.active {
   opacity: 0.8;
 }
 
+/* kept (won’t break even if unused) */
 .toronto-separator { opacity: 0.7; }
+
 .toronto-weather-temp { font-weight: 500; }
 
 /* ✅ FIX: better baseline alignment (weather icon + text) */
@@ -227,16 +238,15 @@ nav a.active {
   border-radius: 999px;
 }
 
-/* Keep METALS + its pills together as one unit (prevents METALS on one line and pills on next) */
+/* Keep METALS + its pills together as one unit */
 .metals-group {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  white-space: nowrap; /* key: breaks as a whole group */
+  white-space: nowrap;
 }
 
-/* ---------- Metals inline (kept) ---------- */
-
+/* ---------- Metals inline ---------- */
 .metals-label {
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -247,10 +257,11 @@ nav a.active {
 .metals-inline {
   font-weight: 500;
   white-space: nowrap;
-  display: inline-flex;          /* ✅ align like weather */
-  align-items: center;           /* ✅ baseline alignment */
-  gap: 6px;                      /* ✅ spacing between pills */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
+
 /* ✅ Time pill (match weather/metals) */
 .time-pill {
   display: inline-flex;
@@ -264,11 +275,6 @@ nav a.active {
   background: rgba(255, 255, 255, 0.14);
   border: 1px solid rgba(255, 255, 255, 0.22);
   white-space: nowrap;
-}
-
-/* Mobile sizing to match others */
-@media (max-width: 720px) {
-  .time-pill { font-size: 10.5px; padding: 2px 7px; }
 }
 
 /* ✅ Weather pill (match metals pills) */
@@ -286,20 +292,11 @@ nav a.active {
   white-space: nowrap;
 }
 
-/* icon inside pill */
 .weather-pill img {
   width: 16px;
   height: 16px;
   border-radius: 999px;
   display: block;
-}
-
-/* Mobile: keep consistent with metals pills sizing */
-@media (max-width: 720px) {
-  .weather-pill {
-    font-size: 10.5px;
-    padding: 2px 7px;
-  }
 }
 
 /* ✅ Metals pills (used by your JS output) */
@@ -318,6 +315,24 @@ nav a.active {
 }
 
 body.dark-mode .toronto-meta { color: #e2e8f0; }
+
+/* =========================================================
+   ✅ TOP BAR FIX: hide empty segments + auto separators
+   Works with updated HTML:
+     - elements with class="segment" + data-seg
+     - weather segment starts hidden
+   ========================================================= */
+.toronto-meta .segment[hidden] {
+  display: none !important;
+}
+
+.toronto-meta .segment:not([hidden]) + .segment:not([hidden])::before {
+  content: "|";
+  display: inline-block;
+  margin: 0 8px 0 6px;
+  opacity: 0.7;
+  transform: translateY(-0.5px);
+}
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -468,7 +483,6 @@ body.dark-mode .toronto-meta { color: #e2e8f0; }
   box-shadow: 0 20px 45px rgba(4, 7, 20, 0.82);
   animation: hero-float 10s ease-in-out infinite;
 
-  /* glassy but still dark (matches header) */
   background: radial-gradient(circle at top left,
     rgba(248, 250, 252, 0.10),
     rgba(5, 10, 30, 0.92)
@@ -523,15 +537,9 @@ body.dark-mode .toronto-meta { color: #e2e8f0; }
   100% { transform: translateY(0); }
 }
 
-/* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   .hero-card { animation: none; }
-
-  .reveal {
-    transition: none;
-    transform: none;
-    opacity: 1;
-  }
+  .reveal { transition: none; transform: none; opacity: 1; }
 }
 
 /* ---------- Main content & cards ---------- */
@@ -544,7 +552,6 @@ section {
   scroll-margin-top: 90px;
 }
 
-/* optional section divider rhythm */
 section + section {
   padding-top: var(--sp-6);
   border-top: 1px solid rgba(31, 37, 51, 0.08);
@@ -556,7 +563,6 @@ body.dark-mode section + section {
   border-top: 1px solid rgba(226, 232, 240, 0.08);
 }
 
-/* Alternating rhythm via card-bg variable */
 section:nth-of-type(even) { --card-bg: #f8f9ff; }
 section:nth-of-type(odd)  { --card-bg: #ffffff; }
 
@@ -599,7 +605,6 @@ section:nth-of-type(odd)  { --card-bg: #ffffff; }
   color: var(--text-muted);
 }
 
-/* ✅ FIX: remove “empty right space” on desktop (no prose constraint inside cards) */
 .card p,
 .card ul {
   max-width: none;
@@ -610,14 +615,14 @@ section:nth-of-type(odd)  { --card-bg: #ffffff; }
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: 20px;
 }
-/* ---------- Experience Timeline (NEW, non-breaking) ---------- */
+
+/* ---------- Experience Timeline ---------- */
 .timeline {
-  --tl-x: 132px;                 /* where the vertical line sits */
+  --tl-x: 132px;
   position: relative;
   padding: 2px 0;
 }
 
-/* vertical line */
 .timeline::before {
   content: "";
   position: absolute;
@@ -629,16 +634,14 @@ section:nth-of-type(odd)  { --card-bg: #ffffff; }
   border-radius: 999px;
 }
 
-/* each timeline row */
 .timeline-item {
   position: relative;
   display: grid;
-  grid-template-columns: 120px 1fr; /* date | content */
+  grid-template-columns: 120px 1fr;
   gap: 28px;
   padding: 10px 0 16px;
 }
 
-/* dot on the line */
 .timeline-item::before {
   content: "";
   position: absolute;
@@ -666,54 +669,17 @@ section:nth-of-type(odd)  { --card-bg: #ffffff; }
   margin: 10px 0 0;
 }
 
-/* Dark mode tune (keeps your theme intact) */
-body.dark-mode .timeline::before {
-  background: rgba(226, 232, 240, 0.16);
-}
-
+body.dark-mode .timeline::before { background: rgba(226, 232, 240, 0.16); }
 body.dark-mode .timeline-item::before {
   background: #020617;
   border-color: rgba(226, 232, 240, 0.55);
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
 }
-
-body.dark-mode .timeline-date {
-  color: #94a3b8;
-}
-
-/* Mobile: single-column timeline */
-@media (max-width: 720px) {
-  .timeline { --tl-x: 10px; }
-
-  .timeline-item {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding-left: 22px;          /* room for dot/line */
-  }
-
-  .timeline-date {
-    text-align: left;
-    padding-top: 0;
-  }
-
-  .timeline-item::before {
-    top: 16px;
-  }
-}
-
+body.dark-mode .timeline-date { color: #94a3b8; }
 
 .item { margin-bottom: 12px; }
-
-.item-title {
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.item-meta {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
+.item-title { font-weight: 600; font-size: 14px; }
+.item-meta { font-size: 12px; color: var(--text-muted); }
 .card ul { padding-left: 18px; }
 
 /* Pills / skill chips */
@@ -775,7 +741,6 @@ body.dark-mode .timeline-date {
   padding-top: 16px;
 }
 
-/* soft hero gradients for secondary pages */
 .sports-hero,
 .travel-hero,
 .blogs-hero {
@@ -821,7 +786,7 @@ body.dark-mode .timeline-date {
   font-size: 12px;
 }
 
-/* Back link under sports / travel / blogs */
+/* Back link */
 .back-link {
   margin-top: 24px;
   font-size: 13px;
@@ -862,7 +827,7 @@ body.dark-mode .timeline-date {
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.75);
 }
 
-/* theme toggle button (for dark/light mode) */
+/* theme toggle button */
 .theme-toggle-btn {
   position: fixed;
   right: 16px;
@@ -897,7 +862,7 @@ footer {
   background-color: #f7f8fc;
 }
 
-/* ---------- Dark mode (refined) ---------- */
+/* ---------- Dark mode ---------- */
 body.dark-mode {
   --bg: #050815;
   --card-bg: #020617;
@@ -909,7 +874,6 @@ body.dark-mode {
   color: var(--text-main);
 }
 
-/* Header & nav in dark mode */
 body.dark-mode header {
   background: radial-gradient(circle at top left, #020617, #050816);
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.75);
@@ -985,7 +949,6 @@ body.dark-mode .hero-profile-wrapper {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
 }
 
-/* ✅ Dark mode: make “What I focus on” feel different vs light mode */
 body.dark-mode .hero-card {
   background: radial-gradient(circle at top left,
     rgba(59, 130, 246, 0.10),
@@ -1036,8 +999,13 @@ body.dark-mode footer {
   color: #64748b;
 }
 
-/* ---------- Mobile tweaks (UPDATED) ---------- */
+/* ---------- Mobile tweaks ---------- */
 @media (max-width: 720px) {
+
+  /* time + weather + metals pill sizes */
+  .time-pill { font-size: 10.5px; padding: 2px 7px; }
+  .weather-pill { font-size: 10.5px; padding: 2px 7px; }
+
   .top-bar {
     display: flex;
     flex-wrap: wrap;
@@ -1046,18 +1014,18 @@ body.dark-mode footer {
 
   .brand { order: 0; }
 
-  /* ✅ FIX: allow wrapping so Silver isn't cut off */
   .toronto-meta {
     order: 1;
     margin-left: auto;
     font-size: 11px;
     gap: 6px;
-    white-space: normal;      /* ✅ was nowrap */
-    flex-wrap: wrap;          /* ✅ allow wrap */
+    white-space: normal;      /* allow wrap */
+    flex-wrap: wrap;
     justify-content: flex-end;
     text-align: right;
+    line-height: 1.35;
   }
-    /* ✅ Keep “METALS” stuck with the pills on mobile */
+
   .metals-label {
     display: inline-flex;
     align-items: center;
@@ -1065,7 +1033,6 @@ body.dark-mode footer {
     white-space: nowrap;
   }
 
-  /* ✅ make metals pills slightly smaller on mobile */
   .metals-pill {
     font-size: 10.5px;
     padding: 2px 7px;
@@ -1094,4 +1061,20 @@ body.dark-mode footer {
   .hero h1 { font-size: 32px; }
 
   .hero-profile-wrapper { margin-top: 20px; }
+
+  /* Mobile: single-column timeline */
+  .timeline { --tl-x: 10px; }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-left: 22px;
+  }
+
+  .timeline-date {
+    text-align: left;
+    padding-top: 0;
+  }
+
+  .timeline-item::before { top: 16px; }
 }
