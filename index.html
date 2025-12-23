@@ -81,20 +81,24 @@
         <a href="blogs.html">Blogs</a>
       </nav>
 
-      <!-- Toronto time + weather + Metals (inline like weather) -->
-      <div class="toronto-meta">
-        <span class="toronto-label">Toronto •</span>
-        <span id="toronto-time" class="time-pill"></span>
+<!-- Toronto time + weather + Metals -->
+<div class="toronto-meta" id="torontoMeta">
+  <span class="toronto-label">Toronto</span>
+  <span class="toronto-dot">•</span>
 
-        <span class="toronto-separator">|</span>
-        <span id="toronto-weather"></span>
+  <!-- Time (always visible) -->
+  <span id="toronto-time" class="time-pill segment" data-seg="time"></span>
 
-        <span class="toronto-separator">|</span>
-        <span class="metals-group">
-        <span class="metals-label">Metals</span>
-        <span id="metals-inline" class="metals-inline" aria-live="polite">Loading…</span>
-      </div>
-    </div>
+  <!-- Weather (hidden until JS populates) -->
+  <span id="toronto-weather" class="segment" data-seg="weather" hidden></span>
+
+  <!-- Metals (always present; content updated by JS) -->
+  <span class="metals-group segment" data-seg="metals">
+    <span class="metals-label">Metals</span>
+    <span id="metals-inline" class="metals-inline" aria-live="polite">Loading…</span>
+  </span>
+</div>
+
 
     <!-- Hero: two-column layout -->
     <div class="hero">
